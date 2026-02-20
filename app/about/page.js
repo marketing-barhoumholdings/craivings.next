@@ -4,6 +4,7 @@ import { sanityClient } from '../../lib/sanity.client';
 import { aboutPageQuery } from '../../lib/sanity.queries';
 import { urlFor } from '../../lib/sanity.image';
 
+
 export async function generateMetadata() {
   const page = await sanityClient.fetch(aboutPageQuery);
   const seo = page?.seo || {};
