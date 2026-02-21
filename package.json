@@ -2,7 +2,7 @@
   "name": "craivings-next",
   "private": true,
   "engines": {
-    "node": "20.x"
+    "node": ">=22.20.0 <23"
   },
   "version": "0.0.0",
   "scripts": {
