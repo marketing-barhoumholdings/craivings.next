@@ -4,6 +4,14 @@ const path = require('path');
 const nextConfig = {
   reactStrictMode: true,
   turbopack: {},
+  async rewrites() {
+    return [
+      {
+        source: "/:path*",
+        destination: "/"
+      }
+    ];
+  },
   webpack: (config) => {
     config.resolve.alias = {
       ...(config.resolve.alias || {}),
