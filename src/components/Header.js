@@ -27,14 +27,16 @@ export const Header = ()=>{
             path: "/contact"
         }
     ];
-    return /*#__PURE__*/ _jsxs("header", {
-        className: "sticky top-0 z-50 w-full bg-[#FFF7F1] shadow-sm",
+    return /*#__PURE__*/ _jsxs(_Fragment, {
         children: [
-            /*#__PURE__*/ _jsx("div", {
-                className: "container mx-auto px-6",
-                children: /*#__PURE__*/ _jsxs("div", {
-                className: "flex items-center justify-between h-20",
-                    children: [
+            /*#__PURE__*/ _jsxs("header", {
+                className: "fixed top-0 z-50 w-full bg-[#FFF7F1] shadow-sm",
+                children: [
+                    /*#__PURE__*/ _jsx("div", {
+                        className: "container mx-auto px-6",
+                        children: /*#__PURE__*/ _jsxs("div", {
+                        className: "flex items-center justify-between h-20",
+                            children: [
                         /*#__PURE__*/ _jsx(Link, {
                             to: "/",
                             className: "flex items-center pl-2",
@@ -48,7 +50,7 @@ export const Header = ()=>{
                             className: "hidden md:flex items-center space-x-8",
                             children: navLinks.map((link)=>/*#__PURE__*/ _jsx(Link, {
                                     to: link.path,
-                            className: "font-poppins font-bold text-gray-700 hover:text-brand-600 transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-red-500 after:transition-all after:duration-300 hover:after:w-full",
+                            className: "font-poppins font-medium text-base text-gray-700 hover:text-brand-600 transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-red-500 after:transition-all after:duration-300 hover:after:w-full",
                                     children: link.name
                                 }, link.name))
                         }),
@@ -84,14 +86,14 @@ export const Header = ()=>{
                                 })
                             })
                         })
-                    ]
-                })
-            }),
-            isMenuOpen && /*#__PURE__*/ _jsx("div", {
-                className: "md:hidden bg-[#FFF7F1] shadow-lg absolute top-20 left-0 w-full",
-                children: /*#__PURE__*/ _jsxs("nav", {
-                    className: "flex flex-col items-center space-y-4 py-8",
-                    children: [
+                            ]
+                        })
+                    }),
+                    isMenuOpen && /*#__PURE__*/ _jsx("div", {
+                        className: "md:hidden bg-[#FFF7F1] shadow-lg absolute top-20 left-0 w-full",
+                        children: /*#__PURE__*/ _jsxs("nav", {
+                            className: "flex flex-col items-center space-y-4 py-8",
+                            children: [
                         navLinks.map((link)=>/*#__PURE__*/ _jsx(Link, {
                                 to: link.path,
                                 className: "font-poppins font-medium text-lg text-gray-700 hover:text-brand-600 transition-colors",
@@ -116,8 +118,13 @@ export const Header = ()=>{
                                 })
                             ]
                         })
-                    ]
-                })
+                            ]
+                        })
+                    })
+                ]
+            }),
+            /*#__PURE__*/ _jsx("div", {
+                className: "h-20"
             })
         ]
     });

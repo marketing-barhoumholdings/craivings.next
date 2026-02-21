@@ -300,7 +300,7 @@ export default function App() {
                         ]
                     }),
                     /*#__PURE__*/ _jsxs("div", {
-                        className: "container mx-auto relative z-10",
+                        className: "w-full relative z-10",
                         children: [
                             /*#__PURE__*/ _jsxs("div", {
                                 className: "grid lg:grid-cols-2 gap-12 lg:gap-16 items-center",
