@@ -2,12 +2,13 @@ import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-run
 import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import brain from 'brain';
-import BlogPostLayout from 'components/BlogPostLayout';
-import { Button } from '@/components/ui/button';
+import BlogPostLayout from '../components/BlogPostLayout';
+import { Button } from '../components/ui/button';
 import { ArrowLeft, Loader2 } from 'lucide-react';
-import { sanityClient } from '@/sanity/client';
-import { postBySlugQuery } from '@/sanity/queries';
-import { buildImageUrl } from '@/sanity/image';
+import { sanityClient } from '../sanity/client';
+import { postBySlugQuery } from '../sanity/queries';
+import { buildImageUrl } from '../sanity/image';
+import { Header } from "../components/Header";
 const BlogPost = ()=>{
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
@@ -170,3 +171,5 @@ const BlogPost = ()=>{
     });
 };
 export default BlogPost;
+
+

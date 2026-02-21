@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --bg: #f6f9ff;
   --bg-soft: #eef3ff;
@@ -22,6 +26,13 @@ body {
   background: linear-gradient(180deg, #f1f6ff 0%, #ffffff 48%);
   color: var(--ink);
   font-size: 14px;
+}
+
+html,
+body,
+#__next {
+  background-color: #ffffff;
+  min-height: 100%;
 }
 
 .hero-wrap {

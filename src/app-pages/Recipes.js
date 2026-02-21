@@ -1,14 +1,15 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { Button } from "../components/ui/button";
+import { Card } from "../components/ui/card";
+import { Input } from "../components/ui/input";
 import { Search, Play, Filter, Grid3x3, List, Clock, Star, ChefHat, X, Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { Footer } from "components/Footer";
+import { Footer } from "../components/Footer";
 import brain from "brain";
-import { Badge } from "@/components/ui/badge";
+import { Badge } from "../components/ui/badge";
+import { Header } from "../components/Header";
 const Recipes = ()=>{
     const [searchParams, setSearchParams] = useSearchParams();
     const [searchQuery, setSearchQuery] = useState("");
@@ -153,7 +154,8 @@ const Recipes = ()=>{
     return /*#__PURE__*/ _jsxs("div", {
         className: "min-h-screen bg-gradient-to-b from-[#FFF9F3] to-white overflow-x-hidden",
         children: [
-            /*#__PURE__*/ _jsx("section", {
+            /*#__PURE__*/ _jsx(Header, {}),
+            /*#__PURE__*/ _jsxs("section", {
                 className: "py-20 px-4 bg-gradient-to-br from-brand-600 to-brand-700 text-white",
                 children: /*#__PURE__*/ _jsxs("div", {
                     className: "container mx-auto text-center",
@@ -617,3 +619,7 @@ const Recipes = ()=>{
     });
 };
 export default Recipes;
+
+
+
+

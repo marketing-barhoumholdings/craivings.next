@@ -1,11 +1,12 @@
 import { jsx as _jsx, jsxs as _jsxs, Fragment as _Fragment } from "react/jsx-runtime";
 import { useEffect, useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
+import { Card } from '../components/ui/card';
+import { Button } from '../components/ui/button';
 import { Calendar, Clock, ArrowRight, Tag, Loader2 } from 'lucide-react';
-import { Footer } from 'components/Footer';
+import { Footer } from '../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import brain from 'brain';
+import { Header } from "../components/Header";
 const Blog = ()=>{
     const navigate = useNavigate();
     const [posts, setPosts] = useState([]);
@@ -98,6 +99,7 @@ const Blog = ()=>{
     return /*#__PURE__*/ _jsxs("div", {
         className: "min-h-screen bg-gradient-to-b from-[#FFF9F3] to-white overflow-x-hidden",
         children: [
+            /*#__PURE__*/ _jsx(Header, {}),
             /*#__PURE__*/ _jsxs("section", {
                 className: "relative py-32 px-4 overflow-hidden",
                 children: [
@@ -390,3 +392,6 @@ const Blog = ()=>{
     });
 };
 export default Blog;
+
+
+

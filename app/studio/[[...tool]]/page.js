@@ -7,7 +7,7 @@ function StudioLoading() {
   return (
     <div className="studio-loading">
       <div className="studio-loading__content">
-        <div className="studio-loading__badge">LeadPass Studio</div>
+        <div className="studio-loading__badge">Craivings Studio</div>
         <h1 className="studio-loading__title">Opening the editor…</h1>
         <p className="studio-loading__copy">
           If this takes more than a few seconds, refresh the page.
@@ -37,13 +37,13 @@ export default function StudioToolPage() {
 
     (async () => {
       try {
-        const [{ NextStudio }, configModule] = await Promise.all([
-          import('next-sanity/studio'),
+        const [{ Studio }, configModule] = await Promise.all([
+          import('sanity'),
           import('../../../sanity.config')
         ]);
         if (cancelled) return;
         const config = configModule.default ?? configModule;
-        setStudio(() => () => <NextStudio config={config} />);
+        setStudio(() => () => <Studio config={config} />);
       } catch (error) {
         if (cancelled) return;
         const message =
@@ -61,7 +61,7 @@ export default function StudioToolPage() {
     return (
       <div className="studio-loading studio-loading--error">
         <div className="studio-loading__content">
-          <div className="studio-loading__badge">LeadPass Studio</div>
+          <div className="studio-loading__badge">Craivings Studio</div>
           <h1 className="studio-loading__title">Studio failed to load</h1>
           <p className="studio-loading__copy">{loadError}</p>
           <p className="studio-loading__copy">

@@ -3,11 +3,11 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { Link } from 'react-router-dom';
 import { Calendar, Tag as TagIcon, ArrowLeft, Clock, Share2, List } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { Footer } from 'components/Footer';
-import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import { Badge } from './ui/badge';
+import { Button } from './ui/button';
+import { Separator } from './ui/separator';
+import { Footer } from './Footer';
+import { Card, CardHeader, CardTitle, CardContent } from './ui/card';
 import brain from 'brain';
 export default function BlogPostLayout({ title, content, excerpt, featuredImage, featuredImageAlt, author, category, tags = [], publishedDate, seoTitle, seoDescription, seo, readingTime, slug }) {
     const [headings, setHeadings] = useState([]);
@@ -652,3 +652,5 @@ export default function BlogPostLayout({ title, content, excerpt, featuredImage,
         ]
     });
 }
+
+

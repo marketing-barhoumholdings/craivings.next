@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import brain from "brain";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "./ui/button";
+import { Input } from "./ui/input";
 export const Footer = ()=>{
     const [email, setEmail] = useState("");
     const [name, setName] = useState("");
@@ -201,3 +201,5 @@ export const Footer = ()=>{
         })
     });
 };
+
+

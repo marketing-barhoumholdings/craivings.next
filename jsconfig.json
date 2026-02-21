@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@/components/ui/*": ["./src/components/ui/*"],
+      "components/*": ["./src/components/*"],
+      "brain": ["./src/brain.js"]
+    }
+  }
+}

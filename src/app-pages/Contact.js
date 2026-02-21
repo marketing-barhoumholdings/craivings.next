@@ -1,23 +1,27 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Card } from "@/components/ui/card";
+import { Button } from "../components/ui/button";
+import { Input } from "../components/ui/input";
+import { Textarea } from "../components/ui/textarea";
+import { Card } from "../components/ui/card";
 import { Youtube, Instagram, Twitter, Mail, MessageSquare, Send } from "lucide-react";
 import { useState } from "react";
-import { Footer } from "components/Footer";
-import { useSanityPage } from "@/sanity/useSanityPage";
+import { Footer } from "../components/Footer";
+import { useSanityPage } from "../sanity/useSanityPage";
+import { Header } from "../components/Header";
 const Contact = ()=>{
     const { page } = useSanityPage("contact");
     if (page?.contentHtml) {
-        return /*#__PURE__*/ _jsx("div", {
+        return /*#__PURE__*/ _jsxs("div", {
             className: "min-h-screen bg-gradient-to-b from-red-50/30 to-white",
-            children: /*#__PURE__*/ _jsx("div", {
-                className: "container mx-auto px-4 py-16",
-                dangerouslySetInnerHTML: {
-                    __html: page.contentHtml
-                }
-            })
+            children: [
+                /*#__PURE__*/ _jsx(Header, {}),
+                /*#__PURE__*/ _jsx("div", {
+                    className: "container mx-auto px-4 py-16",
+                    dangerouslySetInnerHTML: {
+                        __html: page.contentHtml
+                    }
+                })
+            ]
         });
     }
     const [formData, setFormData] = useState({
@@ -69,6 +73,7 @@ const Contact = ()=>{
     return /*#__PURE__*/ _jsxs("div", {
         className: "min-h-screen bg-gradient-to-b from-[#FFF9F3] to-white overflow-x-hidden",
         children: [
+            /*#__PURE__*/ _jsx(Header, {}),
             /*#__PURE__*/ _jsxs("section", {
                 className: "relative py-32 px-4 overflow-hidden",
                 children: [
@@ -384,3 +389,5 @@ const Contact = ()=>{
     });
 };
 export default Contact;
+
+

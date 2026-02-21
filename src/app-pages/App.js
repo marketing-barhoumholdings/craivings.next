@@ -1,27 +1,30 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import { Button } from "../components/ui/button";
+import { Card } from "../components/ui/card";
+import { Input } from "../components/ui/input";
+import { Textarea } from "../components/ui/textarea";
 import { Youtube, Instagram, Twitter, Music, Star, Play, Clock, Sparkles, Wand2, Film, Video, Calendar, MessageSquare, Send, ArrowRight } from "lucide-react";
-import TrendingRecipesCarousel from "components/TrendingRecipesCarousel";
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import brain from "brain";
 import { toast } from "sonner";
-import { useSanityPage } from "@/sanity/useSanityPage";
+import { useSanityPage } from "../sanity/useSanityPage";
+import { Header } from "../components/Header";
 export default function App() {
     const navigate = useNavigate();
     const { page } = useSanityPage("home");
     if (page?.contentHtml) {
-        return /*#__PURE__*/ _jsx("div", {
+        return /*#__PURE__*/ _jsxs("div", {
             className: "min-h-screen bg-gradient-to-b from-red-50/30 to-white",
-            children: /*#__PURE__*/ _jsx("div", {
-                className: "container mx-auto px-4 py-16",
-                dangerouslySetInnerHTML: {
-                    __html: page.contentHtml
-                }
-            })
+            children: [
+                /*#__PURE__*/ _jsx(Header, {}),
+                /*#__PURE__*/ _jsx("div", {
+                    className: "container mx-auto px-6 py-16",
+                    dangerouslySetInnerHTML: {
+                        __html: page.contentHtml
+                    }
+                })
+            ]
         });
     }
     const [email, setEmail] = useState("");
@@ -211,6 +214,56 @@ export default function App() {
         "Authentic, delicious recipes",
         "Weekly new releases"
     ];
+    const trendingRecipes = [
+        {
+            title: "Japanese Ramen Bowl",
+            description: "Authentic flavors in a comforting bowl",
+            time: "25 mins",
+            rating: "4.8",
+            difficulty: "Easy",
+            image: "https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=400&q=80"
+        },
+        {
+            title: "French Croissants",
+            description: "Flaky, buttery perfection",
+            time: "45 mins",
+            rating: "4.9",
+            difficulty: "Medium",
+            image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=400&q=80"
+        },
+        {
+            title: "Chocolate Lava Cake",
+            description: "Molten chocolate indulgence",
+            time: "20 mins",
+            rating: "5.0",
+            difficulty: "Easy",
+            image: "https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=400&q=80"
+        },
+        {
+            title: "Thai Green Curry",
+            description: "Aromatic and spicy Thai classic",
+            time: "35 mins",
+            rating: "4.7",
+            difficulty: "Medium",
+            image: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=400&q=80"
+        },
+        {
+            title: "Classic Margherita Pizza",
+            description: "Simple Italian perfection",
+            time: "30 mins",
+            rating: "4.9",
+            difficulty: "Easy",
+            image: "https://images.unsplash.com/photo-1574071318508-1cdbab80d002?auto=format&fit=crop&w=400&q=80"
+        },
+        {
+            title: "Beef Wellington",
+            description: "Elegant British showstopper",
+            time: "60 mins",
+            rating: "4.8",
+            difficulty: "Hard",
+            image: "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?auto=format&fit=crop&w=400&q=80"
+        }
+    ];
     const handleRecipeRequest = async (e)=>{
         e.preventDefault();
         console.log("Recipe request:", recipeRequest);
@@ -224,8 +277,9 @@ export default function App() {
     return /*#__PURE__*/ _jsxs("div", {
         className: "min-h-screen bg-gradient-to-b from-[#F0F9F4] via-[#FFF9F3] to-white overflow-x-hidden",
         children: [
+            /*#__PURE__*/ _jsx(Header, {}),
             /*#__PURE__*/ _jsxs("section", {
-                className: "relative py-16 lg:py-20 px-4 overflow-hidden bg-gradient-to-br from-red-50 via-white to-red-50",
+                className: "relative py-16 lg:py-20 px-6 overflow-hidden bg-gradient-to-br from-red-50 via-white to-red-50",
                 children: [
                     /*#__PURE__*/ _jsxs("div", {
                         className: "absolute inset-0 overflow-hidden opacity-30",
@@ -246,7 +300,7 @@ export default function App() {
                         ]
                     }),
                     /*#__PURE__*/ _jsxs("div", {
-                        className: "container mx-auto relative z-10 max-w-7xl",
+                        className: "container mx-auto relative z-10",
                         children: [
                             /*#__PURE__*/ _jsxs("div", {
                                 className: "grid lg:grid-cols-2 gap-12 lg:gap-16 items-center",
@@ -309,7 +363,7 @@ export default function App() {
                                                     /*#__PURE__*/ _jsxs(Button, {
                                                         size: "lg",
                                                         onClick: ()=>window.open("https://www.youtube.com/@Craivings", "_blank", "noopener,noreferrer"),
-                                                        className: "bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-700 text-white px-6 py-5 text-base rounded-xl shadow-lg hover:shadow-2xl transition-all hover:scale-105 hover:-translate-y-1",
+                                                        className: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-10 rounded-md px-8 bg-gradient-to-r from-brand-600 to-brand-700 hover:from-brand-700 hover:to-brand-700 text-white px-6 py-5 text-base rounded-xl shadow-lg hover:shadow-2xl transition-all hover:scale-105 hover:-translate-y-1",
                                                         children: [
                                                             /*#__PURE__*/ _jsx(Play, {
                                                                 className: "mr-2 h-5 w-5",
@@ -321,7 +375,7 @@ export default function App() {
                                                     /*#__PURE__*/ _jsx(Button, {
                                                         size: "lg",
                                                         variant: "outline",
-                                                        className: "border-2 border-gray-300 hover:border-brand-600 hover:bg-brand-50 text-gray-700 hover:text-brand-600 px-6 py-5 text-base rounded-xl transition-all hover:scale-105 hover:-translate-y-1",
+                                                        className: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 rounded-md px-8 border-2 border-gray-300 hover:border-brand-600 hover:bg-brand-50 text-gray-700 hover:text-brand-600 px-6 py-5 text-base rounded-xl transition-all hover:scale-105 hover:-translate-y-1",
                                                         children: "Browse Recipes"
                                                     })
                                                 ]
@@ -538,7 +592,6 @@ export default function App() {
                                     })
                                 ]
                             }),
-                            /*#__PURE__*/ _jsx(TrendingRecipesCarousel, {})
                         ]
                     })
                 ]
@@ -579,7 +632,7 @@ export default function App() {
                                                 children: "2M+ Subscribers"
                                             }),
                                             /*#__PURE__*/ _jsx(Button, {
-                                                className: "w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
+                                                className: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
                                                 children: "Subscribe"
                                             })
                                         ]
@@ -605,7 +658,7 @@ export default function App() {
                                                 children: "500K+ Followers"
                                             }),
                                             /*#__PURE__*/ _jsx(Button, {
-                                                className: "w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
+                                                className: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
                                                 children: "Follow"
                                             })
                                         ]
@@ -631,7 +684,7 @@ export default function App() {
                                                 children: "1M+ Followers"
                                             }),
                                             /*#__PURE__*/ _jsx(Button, {
-                                                className: "w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
+                                                className: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
                                                 children: "Follow"
                                             })
                                         ]
@@ -657,7 +710,7 @@ export default function App() {
                                                 children: "300K+ Followers"
                                             }),
                                             /*#__PURE__*/ _jsx(Button, {
-                                                className: "w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
+                                                className: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
                                                 children: "Follow"
                                             })
                                         ]
@@ -668,8 +721,106 @@ export default function App() {
                     ]
                 })
             }),
+            /*#__PURE__*/ _jsxs("section", {
+                className: "mt-20 px-6",
+                children: [
+                    /*#__PURE__*/ _jsxs("div", {
+                        className: "text-center mb-10 animate-fade-in",
+                        style: {
+                            animationDelay: '0.8s'
+                        },
+                        children: [
+                            /*#__PURE__*/ _jsx("h2", {
+                                className: "text-3xl font-bold text-gray-900 mb-2",
+                                children: "Trending Recipes"
+                            }),
+                            /*#__PURE__*/ _jsx("p", {
+                                className: "text-base text-gray-600",
+                                children: "Discover what everyone is cooking"
+                            })
+                        ]
+                    }),
+                    /*#__PURE__*/ _jsx("div", {
+                        className: "overflow-hidden",
+                        children: /*#__PURE__*/ _jsx("div", {
+                            className: "flex gap-5",
+                            children: trendingRecipes.map((recipe, index)=>/*#__PURE__*/ _jsxs("div", {
+                                    className: "flex-[0_0_280px] min-w-0",
+                                    key: `${recipe.title}-${index}`,
+                                    children: [
+                                        /*#__PURE__*/ _jsxs("div", {
+                                            className: "rounded-xl border bg-card text-card-foreground shadow overflow-hidden hover:shadow-xl transition-all duration-500 cursor-pointer group bg-white hover:-translate-y-2",
+                                            children: [
+                                                /*#__PURE__*/ _jsxs("div", {
+                                                    className: "relative aspect-square overflow-hidden",
+                                                    children: [
+                                                        /*#__PURE__*/ _jsx("img", {
+                                                            src: recipe.image,
+                                                            alt: recipe.title,
+                                                            className: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                                                        }),
+                                                        /*#__PURE__*/ _jsx("div", {
+                                                            className: "absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent group-hover:from-black/60 transition-all"
+                                                        }),
+                                                        /*#__PURE__*/ _jsx("div", {
+                                                            className: "absolute top-3 right-3 transform group-hover:scale-110 transition-transform",
+                                                            children: /*#__PURE__*/ _jsx("div", {
+                                                                className: "px-2.5 py-1 bg-white/90 backdrop-blur-sm text-brand-600 text-xs font-bold rounded-lg shadow-lg",
+                                                                children: recipe.difficulty
+                                                            })
+                                                        })
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsxs("div", {
+                                                    className: "p-4",
+                                                    children: [
+                                                        /*#__PURE__*/ _jsx("h3", {
+                                                            className: "text-base font-bold mb-1.5 text-gray-900 group-hover:text-brand-600 transition-colors duration-300",
+                                                            children: recipe.title
+                                                        }),
+                                                        /*#__PURE__*/ _jsx("p", {
+                                                            className: "text-xs text-gray-600 mb-3",
+                                                            children: recipe.description
+                                                        }),
+                                                        /*#__PURE__*/ _jsxs("div", {
+                                                            className: "flex items-center justify-between",
+                                                            children: [
+                                                                /*#__PURE__*/ _jsxs("div", {
+                                                                    className: "flex items-center gap-1 text-xs text-gray-600",
+                                                                    children: [
+                                                                        /*#__PURE__*/ _jsx(Clock, {
+                                                                            className: "h-3.5 w-3.5 text-brand-600"
+                                                                        }),
+                                                                        /*#__PURE__*/ _jsx("span", {
+                                                                            children: recipe.time
+                                                                        })
+                                                                    ]
+                                                                }),
+                                                                /*#__PURE__*/ _jsxs("div", {
+                                                                    className: "flex items-center gap-1 text-xs font-semibold text-gray-900",
+                                                                    children: [
+                                                                        /*#__PURE__*/ _jsx(Star, {
+                                                                            className: "h-3.5 w-3.5 fill-yellow-400 text-yellow-400 group-hover:scale-110 transition-transform"
+                                                                        }),
+                                                                        /*#__PURE__*/ _jsx("span", {
+                                                                            children: recipe.rating
+                                                                        })
+                                                                    ]
+                                                                })
+                                                            ]
+                                                        })
+                                                    ]
+                                                })
+                                            ]
+                                        })
+                                    ]
+                                }))
+                        })
+                    })
+                ]
+            }),
             /*#__PURE__*/ _jsx("section", {
-                className: "py-32 px-4 relative",
+                className: "py-32 px-6 relative",
                 children: /*#__PURE__*/ _jsx("div", {
                     className: "container mx-auto",
                     children: /*#__PURE__*/ _jsxs("div", {
@@ -766,7 +917,7 @@ export default function App() {
                 })
             }),
             /*#__PURE__*/ _jsxs("section", {
-                className: "py-32 px-4 bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden",
+                className: "py-32 px-6 bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden",
                 children: [
                     /*#__PURE__*/ _jsxs("div", {
                         className: "absolute inset-0 opacity-10",
@@ -790,7 +941,7 @@ export default function App() {
                                         children: "Our Values"
                                     }),
                                     /*#__PURE__*/ _jsx("p", {
-                                        className: "text-xl text-gray-300 max-w-3xl mx-auto",
+                                        className: "text-xl text-gray-300  mx-auto",
                                         children: "What makes Craivings special and drives everything we create"
                                     })
                                 ]
@@ -835,7 +986,7 @@ export default function App() {
                 ]
             }),
             /*#__PURE__*/ _jsx("section", {
-                className: "py-32 px-4",
+                className: "py-32 px-6",
                 children: /*#__PURE__*/ _jsxs("div", {
                     className: "container mx-auto",
                     children: [
@@ -965,9 +1116,9 @@ export default function App() {
                 })
             }),
             /*#__PURE__*/ _jsx("section", {
-                className: "py-32 px-4 bg-gradient-to-br from-brand-50 to-white",
+                className: "py-32 px-6 bg-gradient-to-br from-brand-50 to-white",
                 children: /*#__PURE__*/ _jsxs("div", {
-                    className: "container mx-auto max-w-4xl",
+                    className: "container mx-auto",
                     children: [
                         /*#__PURE__*/ _jsxs("div", {
                             className: "text-center mb-16",
@@ -1057,7 +1208,7 @@ export default function App() {
                 })
             }),
             /*#__PURE__*/ _jsx("section", {
-                className: "py-32 px-4",
+                className: "py-32 px-6",
                 children: /*#__PURE__*/ _jsxs("div", {
                     className: "container mx-auto",
                     children: [
@@ -1172,7 +1323,7 @@ export default function App() {
                 })
             }),
             /*#__PURE__*/ _jsx("section", {
-                className: "py-32 px-4 bg-gradient-to-br from-gray-50 to-white",
+                className: "py-32 px-6 bg-gradient-to-br from-gray-50 to-white",
                 children: /*#__PURE__*/ _jsxs("div", {
                     className: "container mx-auto",
                     children: [
@@ -1316,9 +1467,9 @@ export default function App() {
                 })
             }),
             /*#__PURE__*/ _jsx("section", {
-                className: "py-32 px-4",
+                className: "py-32 px-6",
                 children: /*#__PURE__*/ _jsxs("div", {
-                    className: "container mx-auto max-w-4xl",
+                    className: "container mx-auto",
                     children: [
                         /*#__PURE__*/ _jsxs("div", {
                             className: "text-center mb-16",
@@ -1379,7 +1530,7 @@ export default function App() {
                 })
             }),
             /*#__PURE__*/ _jsx("section", {
-                className: "py-32 px-4 bg-gradient-to-br from-brand-50 to-white",
+                className: "py-32 px-6 bg-gradient-to-br from-brand-50 to-white",
                 children: /*#__PURE__*/ _jsxs("div", {
                     className: "container mx-auto",
                     children: [
@@ -1437,9 +1588,9 @@ export default function App() {
                 })
             }),
             /*#__PURE__*/ _jsx("section", {
-                className: "py-32 px-4",
+                className: "py-32 px-6",
                 children: /*#__PURE__*/ _jsxs("div", {
-                    className: "container mx-auto max-w-2xl",
+                    className: "container mx-auto",
                     children: [
                         /*#__PURE__*/ _jsxs("div", {
                             className: "text-center mb-12",
@@ -1531,8 +1682,9 @@ export default function App() {
                     ]
                 })
             }),
+            
             /*#__PURE__*/ _jsxs("section", {
-                className: "py-32 px-4 relative overflow-hidden",
+                className: "py-32 px-6 relative overflow-hidden",
                 children: [
                     /*#__PURE__*/ _jsx("div", {
                         className: "absolute inset-0 bg-gradient-to-br from-brand-100 via-white to-brand-50"
@@ -1546,7 +1698,7 @@ export default function App() {
                     /*#__PURE__*/ _jsx("div", {
                         className: "container mx-auto relative z-10",
                         children: /*#__PURE__*/ _jsx(Card, {
-                            className: "max-w-4xl mx-auto p-12 md:p-16 bg-white/40 backdrop-blur-xl border-white/60 shadow-2xl",
+                            className: " mx-auto p-12 md:p-16 bg-white/40 backdrop-blur-xl border-white/60 shadow-2xl",
                             children: /*#__PURE__*/ _jsxs("div", {
                                 className: "text-center",
                                 children: [
@@ -1555,11 +1707,11 @@ export default function App() {
                                         children: "Stay in the Loop"
                                     }),
                                     /*#__PURE__*/ _jsx("p", {
-                                        className: "text-xl text-gray-600 mb-10 max-w-2xl mx-auto",
+                                        className: "text-xl text-gray-600 mb-10  mx-auto",
                                         children: "Get weekly updates on our latest AI-generated recipes, behind-the-scenes insights, and exclusive content."
                                     }),
                                     /*#__PURE__*/ _jsxs("div", {
-                                        className: "flex flex-col sm:flex-row gap-4 max-w-xl mx-auto",
+                                        className: "flex flex-col sm:flex-row gap-4  mx-auto",
                                         children: [
                                             /*#__PURE__*/ _jsx(Input, {
                                                 type: "email",
@@ -1586,7 +1738,7 @@ export default function App() {
                 ]
             }),
             /*#__PURE__*/ _jsx("footer", {
-                className: "bg-gray-900 text-white py-16 px-4",
+                className: "bg-gray-900 text-white py-16 px-6",
                 children: /*#__PURE__*/ _jsxs("div", {
                     className: "container mx-auto",
                     children: [
@@ -1755,3 +1907,4 @@ export default function App() {
         ]
     });
 }
+
