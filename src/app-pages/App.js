@@ -1606,7 +1606,7 @@ export default function App() {
                             ]
                         }),
                         /*#__PURE__*/ _jsx(Card, {
-                            className: "p-8 bg-white/60 backdrop-blur-sm",
+                            className: "p-8 bg-white/60 backdrop-blur-sm max-w-4xl mx-auto",
                             children: /*#__PURE__*/ _jsxs("form", {
                                 onSubmit: handleRecipeRequest,
                                 className: "space-y-6",
@@ -1696,9 +1696,9 @@ export default function App() {
                         className: "absolute bottom-0 left-0 w-96 h-96 bg-brand-400 rounded-full blur-3xl opacity-20"
                     }),
                     /*#__PURE__*/ _jsx("div", {
-                        className: "container mx-auto relative z-10",
-                        children: /*#__PURE__*/ _jsx(Card, {
-                            className: " mx-auto p-12 md:p-16 bg-white/40 backdrop-blur-xl border-white/60 shadow-2xl",
+                    className: "container mx-auto relative z-10",
+                    children: /*#__PURE__*/ _jsx(Card, {
+                            className: "mx-auto max-w-4xl p-12 md:p-16 bg-white border-white/60 shadow-2xl",
                             children: /*#__PURE__*/ _jsxs("div", {
                                 className: "text-center",
                                 children: [

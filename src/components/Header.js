@@ -48,7 +48,7 @@ export const Header = ()=>{
                             className: "hidden md:flex items-center space-x-8",
                             children: navLinks.map((link)=>/*#__PURE__*/ _jsx(Link, {
                                     to: link.path,
-                            className: "font-poppins font-medium text-gray-700 hover:text-brand-600 transition-colors",
+                            className: "font-poppins font-bold text-gray-700 hover:text-brand-600 transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-0.5 after:w-0 after:bg-red-500 after:transition-all after:duration-300 hover:after:w-full",
                                     children: link.name
                                 }, link.name))
                         }),
