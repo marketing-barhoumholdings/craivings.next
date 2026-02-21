@@ -21,6 +21,9 @@ export default async function sitemap() {
         "updated": coalesce(updatedAt, _updatedAt)
       }`
     );
+    if (!Array.isArray(posts)) {
+      posts = [];
+    }
   } catch (error) {
     posts = [];
   }
