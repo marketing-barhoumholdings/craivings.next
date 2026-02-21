@@ -6,6 +6,10 @@ const nextConfig = {
   async rewrites() {
     return [
       {
+        source: "/studio/:path*",
+        destination: "/studio/:path*"
+      },
+      {
         source: "/:path*",
         destination: "/"
       }
