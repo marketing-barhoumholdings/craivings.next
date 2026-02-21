@@ -743,8 +743,11 @@ export default function App() {
                     /*#__PURE__*/ _jsx("div", {
                         className: "overflow-hidden",
                         children: /*#__PURE__*/ _jsx("div", {
-                            className: "flex gap-5",
-                            children: trendingRecipes.map((recipe, index)=>/*#__PURE__*/ _jsxs("div", {
+                            className: "flex gap-5 trending-marquee",
+                            children: [
+                                ...trendingRecipes,
+                                ...trendingRecipes
+                            ].map((recipe, index)=>/*#__PURE__*/ _jsxs("div", {
                                     className: "flex-[0_0_280px] min-w-0",
                                     key: `${recipe.title}-${index}`,
                                     children: [

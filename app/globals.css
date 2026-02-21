@@ -2,6 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes trending-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.trending-marquee {
+  width: max-content;
+  animation: trending-marquee 35s linear infinite;
+}
+
+@media (max-width: 768px) {
+  .trending-marquee {
+    animation-duration: 45s;
+  }
+}
+
 :root {
   --bg: #f6f9ff;
   --bg-soft: #eef3ff;
