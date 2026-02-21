@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="container footer-grid">
         <div>
           <div className="logo" style={{ marginBottom: 12 }}>
-            <img className="logo-img" src="/logo.png" alt="LeadPass logo" />
+            <img className="logo-img" src="/logo.png" alt="Craivings logo" />
           </div>
           <p>The AI-powered lead exchange infrastructure for modern sales teams.</p>
         </div>
@@ -33,7 +33,7 @@ export default function Footer() {
         </div>
       </div>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', gap: 12, marginTop: 24, color: '#98a2b3', fontSize: 12, flexWrap: 'wrap' }}>
-        <span>? 2024 LeadPass. All rights reserved.</span>
+        <span>? 2024 Craivings. All rights reserved.</span>
         <div style={{ display: 'flex', gap: 16 }}>
           <span>Privacy Policy</span>
           <span>Terms of Service</span>

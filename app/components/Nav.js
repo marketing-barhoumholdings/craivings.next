@@ -5,7 +5,7 @@ export default function Nav({ active }) {
     <div className="nav-wrap">
       <header className="container nav">
         <Link className="logo brand" href="/">
-          <img className="logo-img" src="/logo.png" alt="LeadPass logo" />
+          <img className="logo-img" src="/logo.png" alt="Craivings logo" />
         </Link>
         <nav className="nav-links">
           <Link href="/" className={active === 'home' ? 'active' : ''}>Home</Link>

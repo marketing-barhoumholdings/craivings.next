@@ -7,10 +7,10 @@ import { urlFor } from '../../lib/sanity.image';
 export async function generateMetadata() {
   const page = await sanityClient.fetch(contactPageQuery);
   const seo = page?.seo || {};
-  const title = seo.metaTitle || 'Contact | LeadPass';
+  const title = seo.metaTitle || 'Contact | Craivings';
   const description =
     seo.metaDescription ||
-    'Ready to transform your lead infrastructure? Our team is here to help you get started with LeadPass.';
+    'Ready to transform your lead infrastructure? Our team is here to help you get started with Craivings.';
   const ogImageUrl = seo.ogImage ? urlFor(seo.ogImage).width(1200).height(630).url() : null;
   const twitterImageUrl = seo.twitterImage ? urlFor(seo.twitterImage).width(1200).height(630).url() : null;
   const robots = [seo.noIndex ? 'noindex' : 'index', seo.noFollow ? 'nofollow' : 'follow'].join(',');
@@ -71,7 +71,7 @@ export default async function Contact() {
         <div className="container contact-wrap">
           <div>
             <h1 style={{ fontSize: 32, marginBottom: 10 }}>{page?.heroTitle ?? 'Get in touch'}</h1>
-            <p style={{ color: '#667085', marginBottom: 24 }}>{page?.heroSubtitle ?? 'Ready to transform your lead infrastructure? Our team is here to help you get started with LeadPass.'}</p>
+            <p style={{ color: '#667085', marginBottom: 24 }}>{page?.heroSubtitle ?? 'Ready to transform your lead infrastructure? Our team is here to help you get started with Craivings.'}</p>
             {cards.map((card, index) => (
               <div className="card" style={{ marginBottom: index < 2 ? 16 : 0 }} key={card.title}>
                 <div className="icon">{index === 0 ? '✉' : index === 1 ? '☎' : '📅'}</div>
@@ -99,7 +99,7 @@ export default async function Contact() {
             <textarea className="input" rows={4} placeholder={formFields[5] ?? 'Tell us about your project'} />
             <label className="checkbox">
               <input type="checkbox" />
-              <span>{page?.consentText ?? 'I agree to receive communications from LeadPass and understand that I can opt out at any time.'}</span>
+              <span>{page?.consentText ?? 'I agree to receive communications from Craivings and understand that I can opt out at any time.'}</span>
             </label>
             <button className="btn" style={{ width: '100%' }}>{page?.submitLabel ?? 'Send message'}</button>
           </div>

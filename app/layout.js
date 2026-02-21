@@ -10,7 +10,7 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000';
 
 export const metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'LeadPass',
+  title: 'Craivings',
   description: 'AI-powered lead exchange infrastructure.'
 };
 

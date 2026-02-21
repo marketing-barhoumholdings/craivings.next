@@ -6,7 +6,7 @@ import { urlFor } from '../../lib/sanity.image';
 export async function generateMetadata() {
   const page = await sanityClient.fetch(loginPageQuery);
   const seo = page?.seo || {};
-  const title = seo.metaTitle || 'Login | LeadPass';
+  const title = seo.metaTitle || 'Login | Craivings';
   const description =
     seo.metaDescription || 'Access the AI-powered infrastructure for lead operations';
   const ogImageUrl = seo.ogImage ? urlFor(seo.ogImage).width(1200).height(630).url() : null;
@@ -48,7 +48,7 @@ export default async function Login() {
     <main className="login-wrap">
       <div className="login-card">
         <div className="logo" style={{ marginBottom: 18 }}>
-          <img className="logo-img" src="/logo.png" alt="LeadPass logo" />
+          <img className="logo-img" src="/logo.png" alt="Craivings logo" />
         </div>
         <h1>{page?.title ?? 'Sign in to your account'}</h1>
         <p style={{ color: '#667085', fontSize: 14, marginBottom: 18 }}>{page?.subtitle ?? 'Access the AI-powered infrastructure for lead operations'}</p>

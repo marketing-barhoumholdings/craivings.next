@@ -8,7 +8,7 @@ import { urlFor } from '../../lib/sanity.image';
 export async function generateMetadata() {
   const page = await sanityClient.fetch(aboutPageQuery);
   const seo = page?.seo || {};
-  const title = seo.metaTitle || 'About | LeadPass';
+  const title = seo.metaTitle || 'About | Craivings';
   const description =
     seo.metaDescription ||
     "We are pioneering a new era of intelligent lead exchange infrastructure that scales with modern growth teams.";
