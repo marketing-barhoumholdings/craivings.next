@@ -1,8 +1,16 @@
 import { createClient } from "@sanity/client";
 
-export const sanityClient = createClient({
-  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
-  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
-  apiVersion: "2024-02-20",
-  useCdn: true
-});
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET;
+const hasSanity = !!projectId && !!dataset;
+
+export const sanityClient = hasSanity
+  ? createClient({
+      projectId,
+      dataset,
+      apiVersion: "2024-02-20",
+      useCdn: true
+    })
+  : {
+      fetch: async () => null
+    };
