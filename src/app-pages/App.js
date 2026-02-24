@@ -1518,6 +1518,27 @@ export default function App() {
                                                     children: /*#__PURE__*/ _jsx(Twitter, {
                                                         className: "h-5 w-5"
                                                     })
+                                                }),
+                                                /*#__PURE__*/ _jsx("a", {
+                                                    href: "https://www.tiktok.com/@craivings",
+                                                    target: "_blank",
+                                                    rel: "noopener noreferrer",
+                                                    className: "w-10 h-10 bg-white/10 hover:bg-brand-600 rounded-lg flex items-center justify-center transition-colors",
+                                                    children: /*#__PURE__*/ _jsxs("svg", {
+                                                        xmlns: "http://www.w3.org/2000/svg",
+                                                        viewBox: "0 0 24 24",
+                                                        fill: "currentColor",
+                                                        className: "h-5 w-5",
+                                                        children: [
+                                                            /*#__PURE__*/ _jsx("path", {
+                                                                d: "M16 3h-1.5a6.5 6.5 0 0 0 5.5 5.5V10a8 8 0 0 1-4-1.1V15a5 5 0 1 1-5-5c.4 0 .8 0 1.2.1v2.1a3 3 0 1 0 1.8 2.8V3Z"
+                                                            }),
+                                                            /*#__PURE__*/ _jsx("path", {
+                                                                d: "M14.5 3c.2 1.2.8 2.3 1.7 3.1A6.3 6.3 0 0 0 20 7.9V6.2a4.7 4.7 0 0 1-4.6-3.2h-.9Z",
+                                                                opacity: ".6"
+                                                            })
+                                                        ]
+                                                    })
                                                 })
                                             ]
                                         })
@@ -1614,7 +1635,7 @@ export default function App() {
                                 children: [
                                     /*#__PURE__*/ _jsx("p", {
                                         className: "text-gray-400 text-sm",
-                                        children: "© 2025 Byte of Taste. All rights reserved."
+                                        children: "© 2026 Byte of Taste. Designed by EraXpert.com"
                                     }),
                                     /*#__PURE__*/ _jsxs("div", {
                                         className: "flex gap-6 text-sm text-gray-400",
