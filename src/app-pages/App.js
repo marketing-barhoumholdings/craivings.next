@@ -500,7 +500,7 @@ export default function App() {
                                                 })
                                             }),
                                             /*#__PURE__*/ _jsxs("div", {
-                                                className: "grid grid-cols-2 gap-3 mt-4",
+                                                className: "grid grid-cols-1 sm:grid-cols-2 gap-3 mt-4",
                                                 children: [
                                                     /*#__PURE__*/ _jsx(Card, {
                                                         className: "overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group cursor-pointer hover:-translate-y-2 animate-fade-in",
@@ -553,7 +553,7 @@ export default function App() {
                                                             className: "relative aspect-video",
                                                             children: [
                                                                 /*#__PURE__*/ _jsx("img", {
-                                                                    src: "https://images.unsplash.com/photo-1588013273468-31508b946d4d?auto=format&fit=crop&w=400&q=80",
+                                                                    src: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=400&q=80",
                                                                     alt: "Recipe Video",
                                                                     className: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                                                 }),
@@ -1119,213 +1119,6 @@ export default function App() {
                 })
             }),
             /*#__PURE__*/ _jsx("section", {
-                className: "py-32 px-6 bg-gradient-to-br from-brand-50 to-white",
-                children: /*#__PURE__*/ _jsxs("div", {
-                    className: "container mx-auto",
-                    children: [
-                        /*#__PURE__*/ _jsxs("div", {
-                            className: "text-center mb-16",
-                            children: [
-                                /*#__PURE__*/ _jsx("h2", {
-                                    className: "text-5xl font-bold mb-4",
-                                    children: "Our Journey"
-                                }),
-                                /*#__PURE__*/ _jsx("p", {
-                                    className: "text-xl text-gray-600",
-                                    children: "From passion to a thriving cooking community"
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ _jsx("div", {
-                            className: "space-y-8",
-                            children: [
-                                {
-                                    year: "2024",
-                                    month: "January",
-                                    title: "The Beginning",
-                                    description: "Started sharing our love for cooking with the world"
-                                },
-                                {
-                                    year: "2024",
-                                    month: "April",
-                                    title: "Growing Community",
-                                    description: "Reached our first 100K followers who share our passion"
-                                },
-                                {
-                                    year: "2024",
-                                    month: "July",
-                                    title: "Multi-Platform Presence",
-                                    description: "Expanded to Instagram, TikTok, and Twitter to reach more food lovers"
-                                },
-                                {
-                                    year: "2024",
-                                    month: "October",
-                                    title: "1M+ Community",
-                                    description: "Built a community of over 1 million passionate home cooks"
-                                },
-                                {
-                                    year: "2025",
-                                    month: "January",
-                                    title: "Culinary Milestone",
-                                    description: "Became a trusted source for authentic, tested recipes"
-                                }
-                            ].map((milestone, index)=>/*#__PURE__*/ _jsxs("div", {
-                                    className: "flex gap-6 group",
-                                    children: [
-                                        /*#__PURE__*/ _jsxs("div", {
-                                            className: "flex flex-col items-center",
-                                            children: [
-                                                /*#__PURE__*/ _jsx("div", {
-                                                    className: "w-4 h-4 rounded-full bg-brand-600 group-hover:scale-150 transition-transform"
-                                                }),
-                                                index < 4 && /*#__PURE__*/ _jsx("div", {
-                                                    className: "w-0.5 h-full bg-brand-200 mt-2"
-                                                })
-                                            ]
-                                        }),
-                                        /*#__PURE__*/ _jsxs(Card, {
-                                            className: "flex-1 p-6 bg-white/60 backdrop-blur-sm hover:shadow-xl transition-all",
-                                            children: [
-                                                /*#__PURE__*/ _jsxs("div", {
-                                                    className: "text-sm text-brand-600 font-semibold mb-1",
-                                                    children: [
-                                                        milestone.month,
-                                                        " ",
-                                                        milestone.year
-                                                    ]
-                                                }),
-                                                /*#__PURE__*/ _jsx("h3", {
-                                                    className: "text-2xl font-bold mb-2 text-gray-900",
-                                                    children: milestone.title
-                                                }),
-                                                /*#__PURE__*/ _jsx("p", {
-                                                    className: "text-gray-600",
-                                                    children: milestone.description
-                                                })
-                                            ]
-                                        })
-                                    ]
-                                }, index))
-                        })
-                    ]
-                })
-            }),
-            /*#__PURE__*/ _jsx("section", {
-                className: "py-32 px-6",
-                children: /*#__PURE__*/ _jsxs("div", {
-                    className: "container mx-auto",
-                    children: [
-                        /*#__PURE__*/ _jsxs("div", {
-                            className: "text-center mb-16",
-                            children: [
-                                /*#__PURE__*/ _jsxs("div", {
-                                    className: "flex items-center justify-center gap-3 mb-4",
-                                    children: [
-                                        /*#__PURE__*/ _jsx(Calendar, {
-                                            className: "h-8 w-8 text-brand-600"
-                                        }),
-                                        /*#__PURE__*/ _jsx("h2", {
-                                            className: "text-3xl md:text-5xl font-bold",
-                                            children: "Coming Soon"
-                                        })
-                                    ]
-                                }),
-                                /*#__PURE__*/ _jsx("p", {
-                                    className: "text-base md:text-xl text-gray-600",
-                                    children: comingSoonRecipes.length > 0 || comingSoonBlogPosts.length > 0 ? "Exciting new content dropping soon" : "Stay tuned for upcoming recipes and blog posts"
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ _jsxs("div", {
-                            className: "grid sm:grid-cols-2 lg:grid-cols-3 gap-8",
-                            children: [
-                                comingSoonRecipes.map((recipe)=>/*#__PURE__*/ _jsxs(Card, {
-                                        className: "overflow-hidden bg-white hover:shadow-xl transition-all cursor-pointer group",
-                                        children: [
-                                            /*#__PURE__*/ _jsxs("div", {
-                                                className: "p-6",
-                                                children: [
-                                                    /*#__PURE__*/ _jsxs("div", {
-                                                        className: "text-sm text-gray-500 mb-3",
-                                                        children: [
-                                                            /*#__PURE__*/ _jsx("span", {
-                                                                className: "inline-block px-2 py-0.5 bg-brand-600 text-white text-xs font-semibold rounded-full mr-2",
-                                                                children: "Recipe"
-                                                            }),
-                                                            "Coming Soon"
-                                                        ]
-                                                    }),
-                                                    /*#__PURE__*/ _jsx("h3", {
-                                                        className: "text-lg font-bold mb-2 group-hover:text-brand-600 transition-colors",
-                                                        children: recipe.title
-                                                    }),
-                                                    /*#__PURE__*/ _jsx("p", {
-                                                        className: "text-gray-600 mb-4",
-                                                        children: recipe.excerpt || recipe.description
-                                                    }),
-                                                    /*#__PURE__*/ _jsxs("div", {
-                                                        className: "text-brand-600 font-semibold text-sm flex items-center gap-2",
-                                                        children: [
-                                                            /*#__PURE__*/ _jsx(Clock, {
-                                                                className: "h-4 w-4"
-                                                            }),
-                                                            "Coming Soon"
-                                                        ]
-                                                    })
-                                                ]
-                                            })
-                                        ]
-                                    }, recipe.id)),
-                                comingSoonBlogPosts.map((post)=>/*#__PURE__*/ _jsxs(Card, {
-                                        className: "overflow-hidden bg-white hover:shadow-xl transition-all cursor-pointer group",
-                                        children: [
-                                            /*#__PURE__*/ _jsxs("div", {
-                                                className: "p-6",
-                                                children: [
-                                                    /*#__PURE__*/ _jsxs("div", {
-                                                        className: "text-sm text-gray-500 mb-3",
-                                                        children: [
-                                                            /*#__PURE__*/ _jsx("span", {
-                                                                className: "inline-block px-2 py-0.5 bg-green-600 text-white text-xs font-semibold rounded-full mr-2",
-                                                                children: "Blog Post"
-                                                            }),
-                                                            "Coming Soon"
-                                                        ]
-                                                    }),
-                                                    /*#__PURE__*/ _jsx("h3", {
-                                                        className: "text-lg font-bold mb-2 group-hover:text-brand-600 transition-colors",
-                                                        children: post.title
-                                                    }),
-                                                    /*#__PURE__*/ _jsx("p", {
-                                                        className: "text-gray-600 mb-4",
-                                                        children: post.excerpt
-                                                    }),
-                                                    /*#__PURE__*/ _jsxs("div", {
-                                                        className: "text-brand-600 font-semibold text-sm flex items-center gap-2",
-                                                        children: [
-                                                            /*#__PURE__*/ _jsx(Clock, {
-                                                                className: "h-4 w-4"
-                                                            }),
-                                                            "Coming Soon"
-                                                        ]
-                                                    })
-                                                ]
-                                            })
-                                        ]
-                                    }, post.id)),
-                                comingSoonRecipes.length === 0 && comingSoonBlogPosts.length === 0 && /*#__PURE__*/ _jsx("div", {
-                                    className: "col-span-full text-center py-12",
-                                    children: /*#__PURE__*/ _jsx("p", {
-                                        className: "text-gray-500 text-lg",
-                                        children: "No scheduled content at the moment. Check back soon!"
-                                    })
-                                })
-                            ]
-                        })
-                    ]
-                })
-            }),
-            /*#__PURE__*/ _jsx("section", {
                 className: "py-32 px-6 bg-gradient-to-br from-gray-50 to-white",
                 children: /*#__PURE__*/ _jsxs("div", {
                     className: "container mx-auto",
@@ -1582,6 +1375,98 @@ export default function App() {
                                                 '"',
                                                 press.quote,
                                                 '"'
+                                            ]
+                                        })
+                                    ]
+                                }, index))
+                        })
+                    ]
+                })
+            }),
+            /*#__PURE__*/ _jsx("section", {
+                className: "py-32 px-6 bg-gradient-to-br from-brand-50 to-white",
+                children: /*#__PURE__*/ _jsxs("div", {
+                    className: "container mx-auto",
+                    children: [
+                        /*#__PURE__*/ _jsxs("div", {
+                            className: "text-center mb-16",
+                            children: [
+                                /*#__PURE__*/ _jsx("h2", {
+                                    className: "text-5xl font-bold mb-4",
+                                    children: "Our Journey"
+                                }),
+                                /*#__PURE__*/ _jsx("p", {
+                                    className: "text-xl text-gray-600",
+                                    children: "From passion to a thriving cooking community"
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ _jsx("div", {
+                            className: "space-y-8",
+                            children: [
+                                {
+                                    year: "2024",
+                                    month: "January",
+                                    title: "The Beginning",
+                                    description: "Started sharing our love for cooking with the world"
+                                },
+                                {
+                                    year: "2024",
+                                    month: "April",
+                                    title: "Growing Community",
+                                    description: "Reached our first 100K followers who share our passion"
+                                },
+                                {
+                                    year: "2024",
+                                    month: "July",
+                                    title: "Multi-Platform Presence",
+                                    description: "Expanded to Instagram, TikTok, and Twitter to reach more food lovers"
+                                },
+                                {
+                                    year: "2024",
+                                    month: "October",
+                                    title: "1M+ Community",
+                                    description: "Built a community of over 1 million passionate home cooks"
+                                },
+                                {
+                                    year: "2025",
+                                    month: "January",
+                                    title: "Culinary Milestone",
+                                    description: "Became a trusted source for authentic, tested recipes"
+                                }
+                            ].map((milestone, index)=>/*#__PURE__*/ _jsxs("div", {
+                                    className: "flex gap-6 group",
+                                    children: [
+                                        /*#__PURE__*/ _jsxs("div", {
+                                            className: "flex flex-col items-center",
+                                            children: [
+                                                /*#__PURE__*/ _jsx("div", {
+                                                    className: "w-4 h-4 rounded-full bg-brand-600 group-hover:scale-150 transition-transform"
+                                                }),
+                                                index < 4 && /*#__PURE__*/ _jsx("div", {
+                                                    className: "w-0.5 h-full bg-brand-200 mt-2"
+                                                })
+                                            ]
+                                        }),
+                                        /*#__PURE__*/ _jsxs(Card, {
+                                            className: "flex-1 p-6 bg-white/60 backdrop-blur-sm hover:shadow-xl transition-all",
+                                            children: [
+                                                /*#__PURE__*/ _jsxs("div", {
+                                                    className: "text-sm text-brand-600 font-semibold mb-1",
+                                                    children: [
+                                                        milestone.month,
+                                                        " ",
+                                                        milestone.year
+                                                    ]
+                                                }),
+                                                /*#__PURE__*/ _jsx("h3", {
+                                                    className: "text-2xl font-bold mb-2 text-gray-900",
+                                                    children: milestone.title
+                                                }),
+                                                /*#__PURE__*/ _jsx("p", {
+                                                    className: "text-gray-600",
+                                                    children: milestone.description
+                                                })
                                             ]
                                         })
                                     ]
