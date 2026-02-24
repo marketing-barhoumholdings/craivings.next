@@ -114,13 +114,14 @@ const Contact = ()=>{
             }),
             /*#__PURE__*/ _jsx("section", {
                 className: "py-20 px-4",
-                children: /*#__PURE__*/ _jsx("div", {
+                children: /*#__PURE__*/ _jsxs("div", {
                     className: "container mx-auto",
-                    children: /*#__PURE__*/ _jsxs("div", {
-                        className: "grid lg:grid-cols-2 gap-16",
-                        children: [
-                            /*#__PURE__*/ _jsxs("div", {
-                                children: [
+                    children: [
+                        /*#__PURE__*/ _jsxs("div", {
+                            className: "grid lg:grid-cols-2 gap-16",
+                            children: [
+                                /*#__PURE__*/ _jsxs("div", {
+                                    children: [
                                     /*#__PURE__*/ _jsx("h2", {
                                         className: "text-4xl font-bold mb-4",
                                         children: "Send Us a Message"
@@ -296,58 +297,60 @@ const Contact = ()=>{
                                             })
                                         ]
                                     }),
-                                    /*#__PURE__*/ _jsxs("div", {
-                                        children: [
-                                            /*#__PURE__*/ _jsx("h3", {
-                                                className: "text-2xl font-bold mb-6",
-                                                children: "Connect With Us"
-                                            }),
-                                            /*#__PURE__*/ _jsx("div", {
-                                                className: "space-y-4",
-                                                children: socialLinks.map((social, index)=>/*#__PURE__*/ _jsx("a", {
-                                                        href: social.url,
-                                                        target: "_blank",
-                                                        rel: "noopener noreferrer",
-                                                        className: "block",
-                                                        children: /*#__PURE__*/ _jsx(Card, {
-                                                            className: "p-6 border-0 shadow-lg hover:shadow-xl transition-all cursor-pointer bg-white group",
-                                                            children: /*#__PURE__*/ _jsxs("div", {
-                                                                className: "flex items-center gap-4",
-                                                                children: [
-                                                                    /*#__PURE__*/ _jsx("div", {
-                                                                        className: `w-14 h-14 bg-gradient-to-br ${social.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`,
-                                                                        children: /*#__PURE__*/ _jsx(social.icon, {
-                                                                            className: "h-7 w-7 text-white"
-                                                                        })
-                                                                    }),
-                                                                    /*#__PURE__*/ _jsxs("div", {
-                                                                        className: "flex-1",
-                                                                        children: [
-                                                                            /*#__PURE__*/ _jsx("h4", {
-                                                                                className: "font-bold text-lg",
-                                                                                children: social.name
-                                                                            }),
-                                                                            /*#__PURE__*/ _jsx("p", {
-                                                                                className: "text-gray-600",
-                                                                                children: social.handle
-                                                                            }),
-                                                                            /*#__PURE__*/ _jsx("p", {
-                                                                                className: "text-sm text-gray-500",
-                                                                                children: social.followers
-                                                                            })
-                                                                        ]
-                                                                    })
-                                                                ]
+                                    ]
+                                })
+                            ]
+                        }),
+                        /*#__PURE__*/ _jsxs("div", {
+                            className: "mt-16",
+                            children: [
+                                /*#__PURE__*/ _jsx("h3", {
+                                    className: "text-2xl font-bold mb-6 text-center",
+                                    children: "Connect With Us"
+                                }),
+                                /*#__PURE__*/ _jsx("div", {
+                                    className: "grid sm:grid-cols-2 lg:grid-cols-4 gap-4",
+                                    children: socialLinks.map((social, index)=>/*#__PURE__*/ _jsx("a", {
+                                            href: social.url,
+                                            target: "_blank",
+                                            rel: "noopener noreferrer",
+                                            className: "block",
+                                            children: /*#__PURE__*/ _jsx(Card, {
+                                                className: "p-6 border-0 shadow-lg hover:shadow-xl transition-all cursor-pointer bg-white group h-full",
+                                                children: /*#__PURE__*/ _jsxs("div", {
+                                                    className: "flex items-center gap-4",
+                                                    children: [
+                                                        /*#__PURE__*/ _jsx("div", {
+                                                            className: `w-14 h-14 bg-gradient-to-br ${social.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`,
+                                                            children: /*#__PURE__*/ _jsx(social.icon, {
+                                                                className: "h-7 w-7 text-white"
                                                             })
+                                                        }),
+                                                        /*#__PURE__*/ _jsxs("div", {
+                                                            className: "flex-1",
+                                                            children: [
+                                                                /*#__PURE__*/ _jsx("h4", {
+                                                                    className: "font-bold text-lg",
+                                                                    children: social.name
+                                                                }),
+                                                                /*#__PURE__*/ _jsx("p", {
+                                                                    className: "text-gray-600",
+                                                                    children: social.handle
+                                                                }),
+                                                                /*#__PURE__*/ _jsx("p", {
+                                                                    className: "text-sm text-gray-500",
+                                                                    children: social.followers
+                                                                })
+                                                            ]
                                                         })
-                                                    }, index))
+                                                    ]
+                                                })
                                             })
-                                        ]
-                                    })
-                                ]
-                            })
-                        ]
-                    })
+                                        }, index))
+                                })
+                            ]
+                        })
+                    ]
                 })
             }),
             /*#__PURE__*/ _jsx("section", {
