@@ -44,23 +44,34 @@ const Contact = ()=>{
         {
             icon: Youtube,
             name: "YouTube",
-            handle: "@byteoftaste",
+            handle: "@Craivings",
             followers: "2M subscribers",
-            color: "from-red-500 to-red-600"
+            color: "from-red-500 to-red-600",
+            url: "https://www.youtube.com/@Craivings"
         },
         {
             icon: Instagram,
             name: "Instagram",
-            handle: "@byteoftaste",
+            handle: "@craivingsai",
             followers: "500K followers",
-            color: "from-pink-500 to-purple-600"
+            color: "from-pink-500 to-purple-600",
+            url: "https://www.instagram.com/craivingsai/"
         },
         {
             icon: Twitter,
             name: "Twitter",
-            handle: "@byteoftaste",
-            followers: "250K followers",
-            color: "from-blue-400 to-blue-600"
+            handle: "@craivingsai",
+            followers: "300K followers",
+            color: "from-blue-400 to-blue-600",
+            url: "https://x.com/craivingsai"
+        },
+        {
+            icon: MessageSquare,
+            name: "TikTok",
+            handle: "@craivings",
+            followers: "1M followers",
+            color: "from-gray-800 to-gray-900",
+            url: "https://www.tiktok.com/@craivings"
         }
     ];
     const contactReasons = [
@@ -279,9 +290,9 @@ const Contact = ()=>{
                                                 ]
                                             }),
                                             /*#__PURE__*/ _jsx("a", {
-                                                href: "mailto:hello@byteoftaste.com",
+                                                href: "mailto:info@craivings.com",
                                                 className: "text-brand-600 font-semibold text-lg hover:text-brand-700",
-                                                children: "hello@byteoftaste.com"
+                                                children: "info@craivings.com"
                                             })
                                         ]
                                     }),
@@ -293,35 +304,41 @@ const Contact = ()=>{
                                             }),
                                             /*#__PURE__*/ _jsx("div", {
                                                 className: "space-y-4",
-                                                children: socialLinks.map((social, index)=>/*#__PURE__*/ _jsx(Card, {
-                                                        className: "p-6 border-0 shadow-lg hover:shadow-xl transition-all cursor-pointer bg-white group",
-                                                        children: /*#__PURE__*/ _jsxs("div", {
-                                                            className: "flex items-center gap-4",
-                                                            children: [
-                                                                /*#__PURE__*/ _jsx("div", {
-                                                                    className: `w-14 h-14 bg-gradient-to-br ${social.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`,
-                                                                    children: /*#__PURE__*/ _jsx(social.icon, {
-                                                                        className: "h-7 w-7 text-white"
-                                                                    })
-                                                                }),
-                                                                /*#__PURE__*/ _jsxs("div", {
-                                                                    className: "flex-1",
-                                                                    children: [
-                                                                        /*#__PURE__*/ _jsx("h4", {
-                                                                            className: "font-bold text-lg",
-                                                                            children: social.name
-                                                                        }),
-                                                                        /*#__PURE__*/ _jsx("p", {
-                                                                            className: "text-gray-600",
-                                                                            children: social.handle
-                                                                        }),
-                                                                        /*#__PURE__*/ _jsx("p", {
-                                                                            className: "text-sm text-gray-500",
-                                                                            children: social.followers
+                                                children: socialLinks.map((social, index)=>/*#__PURE__*/ _jsx("a", {
+                                                        href: social.url,
+                                                        target: "_blank",
+                                                        rel: "noopener noreferrer",
+                                                        className: "block",
+                                                        children: /*#__PURE__*/ _jsx(Card, {
+                                                            className: "p-6 border-0 shadow-lg hover:shadow-xl transition-all cursor-pointer bg-white group",
+                                                            children: /*#__PURE__*/ _jsxs("div", {
+                                                                className: "flex items-center gap-4",
+                                                                children: [
+                                                                    /*#__PURE__*/ _jsx("div", {
+                                                                        className: `w-14 h-14 bg-gradient-to-br ${social.color} rounded-xl flex items-center justify-center group-hover:scale-110 transition-transform`,
+                                                                        children: /*#__PURE__*/ _jsx(social.icon, {
+                                                                            className: "h-7 w-7 text-white"
                                                                         })
-                                                                    ]
-                                                                })
-                                                            ]
+                                                                    }),
+                                                                    /*#__PURE__*/ _jsxs("div", {
+                                                                        className: "flex-1",
+                                                                        children: [
+                                                                            /*#__PURE__*/ _jsx("h4", {
+                                                                                className: "font-bold text-lg",
+                                                                                children: social.name
+                                                                            }),
+                                                                            /*#__PURE__*/ _jsx("p", {
+                                                                                className: "text-gray-600",
+                                                                                children: social.handle
+                                                                            }),
+                                                                            /*#__PURE__*/ _jsx("p", {
+                                                                                className: "text-sm text-gray-500",
+                                                                                children: social.followers
+                                                                            })
+                                                                        ]
+                                                                    })
+                                                                ]
+                                                            })
                                                         })
                                                     }, index))
                                             })
@@ -349,35 +366,65 @@ const Contact = ()=>{
                         /*#__PURE__*/ _jsxs("div", {
                             className: "flex flex-wrap justify-center gap-4",
                             children: [
-                                /*#__PURE__*/ _jsxs(Button, {
-                                    size: "lg",
-                                    className: "bg-white text-gray-900 hover:bg-gray-100 rounded-xl px-8 py-6",
-                                    children: [
-                                        /*#__PURE__*/ _jsx(Youtube, {
-                                            className: "mr-2 h-5 w-5"
-                                        }),
-                                        "YouTube"
-                                    ]
+                                /*#__PURE__*/ _jsxs("a", {
+                                    href: "https://www.youtube.com/@Craivings",
+                                    target: "_blank",
+                                    rel: "noopener noreferrer",
+                                    children: /*#__PURE__*/ _jsxs(Button, {
+                                        size: "lg",
+                                        className: "bg-white text-gray-900 hover:bg-gray-100 rounded-xl px-8 py-6",
+                                        children: [
+                                            /*#__PURE__*/ _jsx(Youtube, {
+                                                className: "mr-2 h-5 w-5"
+                                            }),
+                                            "YouTube"
+                                        ]
+                                    })
                                 }),
-                                /*#__PURE__*/ _jsxs(Button, {
-                                    size: "lg",
-                                    className: "bg-white text-gray-900 hover:bg-gray-100 rounded-xl px-8 py-6",
-                                    children: [
-                                        /*#__PURE__*/ _jsx(Instagram, {
-                                            className: "mr-2 h-5 w-5"
-                                        }),
-                                        "Instagram"
-                                    ]
+                                /*#__PURE__*/ _jsxs("a", {
+                                    href: "https://www.instagram.com/craivingsai/",
+                                    target: "_blank",
+                                    rel: "noopener noreferrer",
+                                    children: /*#__PURE__*/ _jsxs(Button, {
+                                        size: "lg",
+                                        className: "bg-white text-gray-900 hover:bg-gray-100 rounded-xl px-8 py-6",
+                                        children: [
+                                            /*#__PURE__*/ _jsx(Instagram, {
+                                                className: "mr-2 h-5 w-5"
+                                            }),
+                                            "Instagram"
+                                        ]
+                                    })
                                 }),
-                                /*#__PURE__*/ _jsxs(Button, {
-                                    size: "lg",
-                                    className: "bg-white text-gray-900 hover:bg-gray-100 rounded-xl px-8 py-6",
-                                    children: [
-                                        /*#__PURE__*/ _jsx(Twitter, {
-                                            className: "mr-2 h-5 w-5"
-                                        }),
-                                        "Twitter"
-                                    ]
+                                /*#__PURE__*/ _jsxs("a", {
+                                    href: "https://x.com/craivingsai",
+                                    target: "_blank",
+                                    rel: "noopener noreferrer",
+                                    children: /*#__PURE__*/ _jsxs(Button, {
+                                        size: "lg",
+                                        className: "bg-white text-gray-900 hover:bg-gray-100 rounded-xl px-8 py-6",
+                                        children: [
+                                            /*#__PURE__*/ _jsx(Twitter, {
+                                                className: "mr-2 h-5 w-5"
+                                            }),
+                                            "Twitter"
+                                        ]
+                                    })
+                                }),
+                                /*#__PURE__*/ _jsxs("a", {
+                                    href: "https://www.tiktok.com/@craivings",
+                                    target: "_blank",
+                                    rel: "noopener noreferrer",
+                                    children: /*#__PURE__*/ _jsxs(Button, {
+                                        size: "lg",
+                                        className: "bg-white text-gray-900 hover:bg-gray-100 rounded-xl px-8 py-6",
+                                        children: [
+                                            /*#__PURE__*/ _jsx(MessageSquare, {
+                                                className: "mr-2 h-5 w-5"
+                                            }),
+                                            "TikTok"
+                                        ]
+                                    })
                                 })
                             ]
                         })
