@@ -331,7 +331,7 @@ export default function App() {
                                                                         xmlns: "http://www.w3.org/2000/svg",
                                                                         children: /*#__PURE__*/ _jsx("path", {
                                                                             d: "M5 15C100 5, 300 5, 395 15",
-                                                                            stroke: "#DC2626",
+                                                                            stroke: "rgba(155, 25, 28)",
                                                                             strokeWidth: "8",
                                                                             strokeLinecap: "round",
                                                                             fill: "none"
@@ -597,7 +597,7 @@ export default function App() {
                 ]
             }),
             /*#__PURE__*/ _jsx("section", {
-                className: "py-20 px-4 bg-gradient-to-br from-brand-600 to-brand-700 text-white",
+                className: "py-20 px-4 bg-gradient-to-br from-[#8B0A0A] via-[#A30B0B] to-[#7A0707] text-white",
                 children: /*#__PURE__*/ _jsxs("div", {
                     className: "container mx-auto text-center",
                     children: [
