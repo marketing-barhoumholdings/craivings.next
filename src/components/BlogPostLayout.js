@@ -15,15 +15,15 @@ export default function BlogPostLayout({ title, content, excerpt, featuredImage,
     const [showMobileToc, setShowMobileToc] = useState(false);
     const [recentPosts, setRecentPosts] = useState([]);
     const [latestRecipes, setLatestRecipes] = useState([]);
-    const finalSeoTitle = (seo?.metaTitle || seoTitle || title) ?? title;
-    const finalSeoDescription = (seo?.metaDescription || seoDescription || excerpt || title) ?? title;
+    const finalSeoTitle = String((seo?.metaTitle || seoTitle || title) ?? title ?? '');
+    const finalSeoDescription = String((seo?.metaDescription || seoDescription || excerpt || title) ?? title ?? '');
     const canonicalUrl = seo?.canonicalUrl || (typeof window !== 'undefined' ? window.location.href : '');
-    const ogTitle = seo?.ogTitle || finalSeoTitle;
-    const ogDescription = seo?.ogDescription || finalSeoDescription;
+    const ogTitle = String(seo?.ogTitle || finalSeoTitle || '');
+    const ogDescription = String(seo?.ogDescription || finalSeoDescription || '');
     const ogImageUrl = seo?.ogImageUrl || featuredImage;
     const ogImageAlt = seo?.ogImageAlt || featuredImageAlt || title;
-    const twitterTitle = seo?.twitterTitle || finalSeoTitle;
-    const twitterDescription = seo?.twitterDescription || finalSeoDescription;
+    const twitterTitle = String(seo?.twitterTitle || finalSeoTitle || '');
+    const twitterDescription = String(seo?.twitterDescription || finalSeoDescription || '');
     const twitterImageUrl = seo?.twitterImageUrl || ogImageUrl || featuredImage;
     const twitterImageAlt = ogImageAlt;
     const robots = seo?.metaRobots || `${seo?.noIndex ? 'noindex' : 'index'},${seo?.noFollow ? 'nofollow' : 'follow'}`;
@@ -125,11 +125,8 @@ export default function BlogPostLayout({ title, content, excerpt, featuredImage,
         children: [
             /*#__PURE__*/ _jsxs(Helmet, {
                 children: [
-                    /*#__PURE__*/ _jsxs("title", {
-                        children: [
-                            finalSeoTitle,
-                            " | Craivings"
-                        ]
+                    /*#__PURE__*/ _jsx("title", {
+                        children: `${finalSeoTitle || "Craivings"} | Craivings`
                     }),
                     /*#__PURE__*/ _jsx("meta", {
                         name: "description",

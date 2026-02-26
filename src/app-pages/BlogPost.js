@@ -137,15 +137,15 @@ const BlogPost = ()=>{
     // Render content with proper HTML parsing
     const renderContent = ()=>{
         // Parse content as HTML if it contains HTML tags, otherwise render as paragraphs
-        if (post.content.includes('<')) {
+        if ((post?.content || "").includes('<')) {
             return /*#__PURE__*/ _jsx("div", {
                 dangerouslySetInnerHTML: {
-                    __html: post.content
+                    __html: post.content || ""
                 }
             });
         }
         // Split by double newlines to create paragraphs
-        const paragraphs = post.content.split('\n\n');
+        const paragraphs = (post?.content || "").split('\n\n');
         return /*#__PURE__*/ _jsx(_Fragment, {
             children: paragraphs.map((para, index)=>/*#__PURE__*/ _jsx("p", {
                     className: "mb-4",

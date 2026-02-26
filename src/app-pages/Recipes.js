@@ -453,7 +453,7 @@ const Recipes = ()=>{
                         className: viewMode === "grid" ? "grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" : "space-y-4",
                         children: filteredRecipes.map((recipe)=>viewMode === "grid" ? /*#__PURE__*/ _jsxs(Card, {
                                 className: "group overflow-hidden hover:shadow-2xl transition-all cursor-pointer",
-                                onClick: ()=>navigate(`/recipe-detail?slug=${recipe.slug}`),
+                                onClick: ()=>window.open("https://www.youtube.com/@Craivings", "_blank", "noopener,noreferrer"),
                                 children: [
                                     /*#__PURE__*/ _jsxs("div", {
                                         className: "relative aspect-video overflow-hidden",
@@ -520,7 +520,7 @@ const Recipes = ()=>{
                                 ]
                             }, recipe.id) : /*#__PURE__*/ _jsxs(Card, {
                                 className: "flex gap-6 p-4 hover:shadow-xl transition-all cursor-pointer",
-                                onClick: ()=>navigate(`/recipe-detail?slug=${recipe.slug}`),
+                                onClick: ()=>window.open("https://www.youtube.com/@Craivings", "_blank", "noopener,noreferrer"),
                                 children: [
                                     /*#__PURE__*/ _jsxs("div", {
                                         className: "relative w-48 h-32 overflow-hidden rounded-lg flex-shrink-0",

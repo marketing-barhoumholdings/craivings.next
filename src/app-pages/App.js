@@ -169,21 +169,24 @@ export default function App() {
             title: "Perfect Italian Carbonara",
             thumbnail: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=800&q=80",
             duration: "8:45",
-            views: "127K"
+            views: "127K",
+            url: "https://www.youtube.com/@Craivings"
         },
         {
             id: 2,
             title: "Artisan Sourdough Bread",
             thumbnail: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80",
             duration: "12:30",
-            views: "89K"
+            views: "89K",
+            url: "https://www.youtube.com/@Craivings"
         },
         {
             id: 3,
             title: "Thai Green Curry Masterclass",
             thumbnail: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=800&q=80",
             duration: "10:15",
-            views: "156K"
+            views: "156K",
+            url: "https://www.youtube.com/@Craivings"
         }
     ];
     const productionSteps = [
@@ -391,7 +394,7 @@ export default function App() {
                                                         children: [
                                                             /*#__PURE__*/ _jsx("div", {
                                                                 className: "text-3xl md:text-4xl font-bold text-brand-600 mb-1 group-hover:scale-110 transition-transform duration-300",
-                                                                children: "500+"
+                                                                children: "21+"
                                                             }),
                                                             /*#__PURE__*/ _jsx("div", {
                                                                 className: "text-xs text-gray-600",
@@ -404,7 +407,7 @@ export default function App() {
                                                         children: [
                                                             /*#__PURE__*/ _jsx("div", {
                                                                 className: "text-3xl md:text-4xl font-bold text-brand-600 mb-1 group-hover:scale-110 transition-transform duration-300",
-                                                                children: "2M+"
+                                                                children: "8,169+"
                                                             }),
                                                             /*#__PURE__*/ _jsx("div", {
                                                                 className: "text-xs text-gray-600",
@@ -417,7 +420,7 @@ export default function App() {
                                                         children: [
                                                             /*#__PURE__*/ _jsx("div", {
                                                                 className: "text-3xl md:text-4xl font-bold text-brand-600 mb-1 group-hover:scale-110 transition-transform duration-300",
-                                                                children: "150+"
+                                                                children: "21+"
                                                             }),
                                                             /*#__PURE__*/ _jsx("div", {
                                                                 className: "text-xs text-gray-600",
@@ -629,7 +632,7 @@ export default function App() {
                                             }),
                                             /*#__PURE__*/ _jsx("p", {
                                                 className: "text-gray-600 text-sm mb-3",
-                                                children: "2M+ Subscribers"
+                                                children: "0+ Subscribers"
                                             }),
                                             /*#__PURE__*/ _jsx(Button, {
                                                 className: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
@@ -655,7 +658,7 @@ export default function App() {
                                             }),
                                             /*#__PURE__*/ _jsx("p", {
                                                 className: "text-gray-600 text-sm mb-3",
-                                                children: "500K+ Followers"
+                                                children: "0+ Followers"
                                             }),
                                             /*#__PURE__*/ _jsx(Button, {
                                                 className: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
@@ -681,7 +684,7 @@ export default function App() {
                                             }),
                                             /*#__PURE__*/ _jsx("p", {
                                                 className: "text-gray-600 text-sm mb-3",
-                                                children: "1M+ Followers"
+                                                children: "0+ Followers"
                                             }),
                                             /*#__PURE__*/ _jsx(Button, {
                                                 className: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
@@ -707,7 +710,7 @@ export default function App() {
                                             }),
                                             /*#__PURE__*/ _jsx("p", {
                                                 className: "text-gray-600 text-sm mb-3",
-                                                children: "300K+ Followers"
+                                                children: "0+ Followers"
                                             }),
                                             /*#__PURE__*/ _jsx(Button, {
                                                 className: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
@@ -865,7 +868,7 @@ export default function App() {
                                             children: [
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-4xl font-bold text-brand-600 mb-2",
-                                                    children: "500+"
+                                                    children: "21+"
                                                 }),
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-gray-600",
@@ -878,7 +881,7 @@ export default function App() {
                                             children: [
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-4xl font-bold text-brand-600 mb-2",
-                                                    children: "2M+"
+                                                    children: "16+"
                                                 }),
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-gray-600",
@@ -891,7 +894,7 @@ export default function App() {
                                             children: [
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-4xl font-bold text-brand-600 mb-2",
-                                                    children: "50M+"
+                                                    children: "8,169+"
                                                 }),
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-gray-600",
@@ -904,7 +907,7 @@ export default function App() {
                                             children: [
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-4xl font-bold text-brand-600 mb-2",
-                                                    children: "100%"
+                                                    children: "50%"
                                                 }),
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-gray-600",
@@ -1070,7 +1073,7 @@ export default function App() {
                                     ]
                                 }, recipe.id)) : featuredVideos.map((video)=>/*#__PURE__*/ _jsxs(Card, {
                                     className: "group overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all cursor-pointer",
-                                    onClick: ()=>navigate('/recipe-detail'),
+                                    onClick: ()=>window.open(video.url, "_blank", "noopener,noreferrer"),
                                     children: [
                                         /*#__PURE__*/ _jsxs("div", {
                                             className: "relative aspect-video overflow-hidden",
@@ -1096,21 +1099,12 @@ export default function App() {
                                                 })
                                             ]
                                         }),
-                                        /*#__PURE__*/ _jsxs("div", {
+                                        /*#__PURE__*/ _jsx("div", {
                                             className: "p-6 bg-white",
-                                            children: [
-                                                /*#__PURE__*/ _jsx("h3", {
-                                                    className: "text-lg font-bold mb-2 group-hover:text-brand-600 transition-colors",
-                                                    children: video.title
-                                                }),
-                                                /*#__PURE__*/ _jsxs("p", {
-                                                    className: "text-gray-500",
-                                                    children: [
-                                                        video.views,
-                                                        " views"
-                                                    ]
-                                                })
-                                            ]
+                                            children: /*#__PURE__*/ _jsx("h3", {
+                                                className: "text-lg font-bold mb-2 group-hover:text-brand-600 transition-colors",
+                                                children: video.title
+                                            })
                                         })
                                     ]
                                 }, video.id))
@@ -1462,7 +1456,7 @@ export default function App() {
                                     }),
                                     /*#__PURE__*/ _jsx("p", {
                                         className: "text-sm text-gray-500 mt-4",
-                                        children: "Join 50,000+ food enthusiasts and tech innovators"
+                                        children: "Join 0+ food enthusiasts and tech innovators"
                                     })
                                 ]
                             })

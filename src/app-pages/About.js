@@ -44,19 +44,19 @@ const About = ()=>{
     ];
     const milestones = [
         {
-            number: "2M+",
+            number: "16+",
             label: "YouTube Subscribers"
         },
         {
-            number: "500+",
+            number: "21+",
             label: "AI-Generated Videos"
         },
         {
-            number: "50M+",
+            number: "8,169+",
             label: "Total Views"
         },
         {
-            number: "100%",
+            number: "50%",
             label: "AI-Powered"
         }
     ];
@@ -122,8 +122,8 @@ const About = ()=>{
                         children: [
                             /*#__PURE__*/ _jsx("div", {
                                 children: /*#__PURE__*/ _jsx("img", {
-                                    src: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80",
-                                    alt: "AI Technology",
+                                    src: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
+                                    alt: "Craivings cooking content",
                                     className: "rounded-3xl shadow-2xl"
                                 })
                             }),
@@ -147,6 +147,88 @@ const About = ()=>{
                                     /*#__PURE__*/ _jsx("p", {
                                         className: "text-gray-600 text-lg leading-relaxed",
                                         children: "We're building the future of food media, one algorithm at a time."
+                                    }),
+                                ]
+                            })
+                        ]
+                    })
+                })
+            }),
+            /*#__PURE__*/ _jsx("section", {
+                className: "py-20 px-4",
+                children: /*#__PURE__*/ _jsx("div", {
+                    className: "container mx-auto",
+                    children: /*#__PURE__*/ _jsxs("div", {
+                        className: "grid lg:grid-cols-2 gap-16 items-center",
+                        children: [
+                            /*#__PURE__*/ _jsx("div", {
+                                className: "lg:-mt-[7.5rem]",
+                                children: /*#__PURE__*/ _jsx("img", {
+                                    src: "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?auto=format&fit=crop&w=1200&q=80",
+                                    alt: "Our Vision cooking",
+                                    className: "rounded-3xl shadow-2xl w-full max-h-[360px] object-cover"
+                                })
+                            }),
+                            /*#__PURE__*/ _jsxs("div", {
+                                children: [
+                                    /*#__PURE__*/ _jsx("h2", {
+                                        className: "text-5xl font-bold mb-6 leading-tight",
+                                        children: "Our Vision"
+                                    }),
+                                    /*#__PURE__*/ _jsx("div", {
+                                        className: "w-20 h-1 bg-gradient-to-r from-brand-500 to-brand-300 mb-8"
+                                    }),
+                                    /*#__PURE__*/ _jsx("p", {
+                                        className: "text-gray-600 text-lg leading-relaxed mb-2",
+                                        children: "Cook smarter. Eat better."
+                                    }),
+                                    /*#__PURE__*/ _jsx("p", {
+                                        className: "text-gray-600 text-lg leading-relaxed mb-4",
+                                        children: "Where cooking finally makes sense."
+                                    }),
+                                    /*#__PURE__*/ _jsx("p", {
+                                        className: "text-gray-600 text-lg leading-relaxed mb-4",
+                                        children: "Craivings is an AI-powered cooking channel focused on simple, reliable, step-by-step recipes that actually work in real kitchens."
+                                    }),
+                                    /*#__PURE__*/ _jsx("p", {
+                                        className: "text-gray-600 text-lg leading-relaxed mb-4",
+                                        children: "We break down cooking using clear visuals, exact timings, temperatures, and smart techniques—so you understand why food works, not just how to cook it."
+                                    }),
+                                    /*#__PURE__*/ _jsxs("div", {
+                                        className: "mb-6",
+                                        children: [
+                                            /*#__PURE__*/ _jsx("p", {
+                                                className: "text-gray-600 text-lg leading-relaxed mb-3 font-semibold",
+                                                children: "Expect:"
+                                            }),
+                                            /*#__PURE__*/ _jsxs("ul", {
+                                                className: "grid sm:grid-cols-2 gap-2 text-gray-600 text-lg leading-relaxed",
+                                                children: [
+                                                    /*#__PURE__*/ _jsx("li", {
+                                                        children: "• Easy home cooking recipes"
+                                                    }),
+                                                    /*#__PURE__*/ _jsx("li", {
+                                                        children: "• Air fryer, oven & stovetop methods"
+                                                    }),
+                                                    /*#__PURE__*/ _jsx("li", {
+                                                        children: "• Weeknight dinners & meal prep"
+                                                    }),
+                                                    /*#__PURE__*/ _jsx("li", {
+                                                        children: "• Beginner-friendly cooking basics"
+                                                    }),
+                                                    /*#__PURE__*/ _jsx("li", {
+                                                        children: "• High-protein & family-friendly meals"
+                                                    }),
+                                                    /*#__PURE__*/ _jsx("li", {
+                                                        children: "• Visual cooking explanations"
+                                                    })
+                                                ]
+                                            })
+                                        ]
+                                    }),
+                                    /*#__PURE__*/ _jsx("p", {
+                                        className: "text-gray-600 text-lg leading-relaxed",
+                                        children: "Whether you’re new to cooking or tired of confusing recipes, Craivings helps you cook with confidence—every time."
                                     })
                                 ]
                             })

@@ -198,7 +198,7 @@ export const Footer = ()=>{
                         children: [
                             /*#__PURE__*/ _jsx("p", {
                                 className: "text-gray-400 text-sm",
-                                children: "© 2026 Byte of Taste. All rights reserved."
+                                children: "© 2026 Byte of Taste. Designed by EraXpert.com"
                             }),
                             /*#__PURE__*/ _jsxs("div", {
                                 className: "flex gap-6 text-sm text-gray-400",
