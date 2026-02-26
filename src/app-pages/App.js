@@ -29,15 +29,46 @@ export default function App() {
     }
     const [email, setEmail] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
+    const [subscribing, setSubscribing] = useState(false);
     const [recipeRequest, setRecipeRequest] = useState({
         name: "",
         recipe: "",
         message: ""
     });
     const [latestRecipes, setLatestRecipes] = useState([]);
+    const [youtubeVideos, setYoutubeVideos] = useState([]);
+    const [youtubeStats, setYoutubeStats] = useState({
+        subscriberCount: null,
+        videoCount: null,
+        viewCount: null
+    });
     const [categories, setCategories] = useState([]);
     const [testimonials, setTestimonials] = useState([]);
     const [testimonialApi, setTestimonialApi] = useState();
+    const handleNewsletterSubmit = async (e)=>{
+        e.preventDefault();
+        if (!email) return;
+        setIsSubmitting(true);
+        setSubscribing(true);
+        try {
+            const response = await brain.subscribe_newsletter({
+                email
+            });
+            const data = await response.json();
+            if (data.success) {
+                toast.success(data.message || "Successfully subscribed to newsletter!");
+                setEmail("");
+            } else {
+                toast.error("Failed to subscribe. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error subscribing to newsletter:", error);
+            toast.error("Failed to subscribe. Please try again.");
+        } finally{
+            setIsSubmitting(false);
+            setSubscribing(false);
+        }
+    };
     const [fanFavoriteRecipes, setFanFavoriteRecipes] = useState([]);
     const [comingSoonRecipes, setComingSoonRecipes] = useState([]);
     const [comingSoonBlogPosts, setComingSoonBlogPosts] = useState([]);
@@ -58,6 +89,62 @@ export default function App() {
             }
         };
         fetchLatestRecipes();
+    }, []);
+    useEffect(()=>{
+        const fetchYoutubeVideos = async ()=>{
+            try {
+                const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || process.env.YOUTUBE_API_KEY;
+                const channelId = process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ID || process.env.YOUTUBE_CHANNEL_ID;
+                if (!apiKey || !channelId) return;
+                const searchRes = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=12&order=date&type=video&key=${apiKey}`);
+                const searchData = await searchRes.json();
+                const items = searchData.items || [];
+                if (items.length === 0) return;
+                const videoIds = items.map((item)=>item.id.videoId).join(",");
+                const detailsRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics&id=${videoIds}&key=${apiKey}`);
+                const detailsData = await detailsRes.json();
+                const detailsMap = new Map((detailsData.items || []).map((item)=>[
+                        item.id,
+                        item
+                    ]));
+                const formatDuration = (iso)=>{
+                    if (!iso) return "0:00";
+                    const match = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+                    const h = parseInt(match?.[1] || "0", 10);
+                    const m = parseInt(match?.[2] || "0", 10);
+                    const s = parseInt(match?.[3] || "0", 10);
+                    const totalMinutes = h * 60 + m;
+                    return `${totalMinutes}:${s.toString().padStart(2, "0")}`;
+                };
+                const mapped = items.map((item, idx)=>{
+                    const details = detailsMap.get(item.id.videoId);
+                    const duration = formatDuration(details?.contentDetails?.duration);
+                    const views = details?.statistics?.viewCount ? Number(details.statistics.viewCount).toLocaleString() : "0";
+                    return {
+                        id: item.id.videoId || idx + 1,
+                        title: item.snippet?.title || "Video",
+                        thumbnail: item.snippet?.thumbnails?.high?.url || item.snippet?.thumbnails?.medium?.url,
+                        duration,
+                        views,
+                        url: `https://www.youtube.com/watch?v=${item.id.videoId}`
+                    };
+                });
+                setYoutubeVideos(mapped);
+                const statsRes = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${apiKey}`);
+                const statsData = await statsRes.json();
+                const stats = statsData.items?.[0]?.statistics;
+                if (stats) {
+                    setYoutubeStats({
+                        subscriberCount: Number(stats.subscriberCount || 0).toLocaleString(),
+                        videoCount: Number(stats.videoCount || 0).toLocaleString(),
+                        viewCount: Number(stats.viewCount || 0).toLocaleString()
+                    });
+                }
+            } catch (error) {
+                console.error("Error fetching YouTube videos:", error);
+            }
+        };
+        fetchYoutubeVideos();
     }, []);
     useEffect(()=>{
         const fetchFanFavorites = async ()=>{
@@ -163,7 +250,7 @@ export default function App() {
     }, [
         testimonialApi
     ]);
-    const featuredVideos = [
+    const featuredVideos = youtubeVideos.length > 0 ? youtubeVideos.slice(0, 3) : [
         {
             id: 1,
             title: "Perfect Italian Carbonara",
@@ -189,6 +276,7 @@ export default function App() {
             url: "https://www.youtube.com/@Craivings"
         }
     ];
+    const heroVideos = featuredVideos.slice(0, 3);
     const productionSteps = [
         {
             icon: Sparkles,
@@ -267,6 +355,16 @@ export default function App() {
             image: "https://images.unsplash.com/photo-1588168333986-5078d3ae3976?auto=format&fit=crop&w=400&q=80"
         }
     ];
+    const youtubeTrending = youtubeVideos.length > 0 ? youtubeVideos.map((video)=>({
+            title: video.title,
+            description: "Latest from our channel",
+            time: video.duration,
+            rating: "4.8",
+            difficulty: "Easy",
+            image: video.thumbnail,
+            url: video.url,
+            views: video.views
+        })) : [];
     const handleRecipeRequest = async (e)=>{
         e.preventDefault();
         console.log("Recipe request:", recipeRequest);
@@ -379,6 +477,7 @@ export default function App() {
                                                         size: "lg",
                                                         variant: "outline",
                                                         className: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground h-10 rounded-md px-8 border-2 border-gray-300 hover:border-brand-600 hover:bg-brand-50 text-gray-700 hover:text-brand-600 px-6 py-5 text-base rounded-xl transition-all hover:scale-105 hover:-translate-y-1",
+                                                        onClick: ()=>navigate('/recipes'),
                                                         children: "Browse Recipes"
                                                     })
                                                 ]
@@ -394,7 +493,7 @@ export default function App() {
                                                         children: [
                                                             /*#__PURE__*/ _jsx("div", {
                                                                 className: "text-3xl md:text-4xl font-bold text-brand-600 mb-1 group-hover:scale-110 transition-transform duration-300",
-                                                                children: "21+"
+                                                                children: `${youtubeStats.videoCount || "0"}+`
                                                             }),
                                                             /*#__PURE__*/ _jsx("div", {
                                                                 className: "text-xs text-gray-600",
@@ -407,7 +506,7 @@ export default function App() {
                                                         children: [
                                                             /*#__PURE__*/ _jsx("div", {
                                                                 className: "text-3xl md:text-4xl font-bold text-brand-600 mb-1 group-hover:scale-110 transition-transform duration-300",
-                                                                children: "8,169+"
+                                                                children: `${youtubeStats.viewCount || "0"}+`
                                                             }),
                                                             /*#__PURE__*/ _jsx("div", {
                                                                 className: "text-xs text-gray-600",
@@ -420,7 +519,7 @@ export default function App() {
                                                         children: [
                                                             /*#__PURE__*/ _jsx("div", {
                                                                 className: "text-3xl md:text-4xl font-bold text-brand-600 mb-1 group-hover:scale-110 transition-transform duration-300",
-                                                                children: "21+"
+                                                                children: `${youtubeStats.videoCount || "0"}+`
                                                             }),
                                                             /*#__PURE__*/ _jsx("div", {
                                                                 className: "text-xs text-gray-600",
@@ -440,12 +539,13 @@ export default function App() {
                                         children: [
                                             /*#__PURE__*/ _jsx(Card, {
                                                 className: "overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group cursor-pointer hover:-translate-y-2 animate-float-slow",
+                                                onClick: ()=>heroVideos[0]?.url && window.open(heroVideos[0].url, "_blank", "noopener,noreferrer"),
                                                 children: /*#__PURE__*/ _jsxs("div", {
                                                     className: "relative aspect-video",
                                                     children: [
                                                         /*#__PURE__*/ _jsx("img", {
-                                                            src: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80",
-                                                            alt: "Featured Recipe",
+                                                            src: heroVideos[0]?.thumbnail || "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80",
+                                                            alt: heroVideos[0]?.title || "Featured Recipe",
                                                             className: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                                                         }),
                                                         /*#__PURE__*/ _jsx("div", {
@@ -465,7 +565,7 @@ export default function App() {
                                                             className: "absolute top-3 right-3 opacity-90 group-hover:opacity-100 transition-opacity",
                                                             children: /*#__PURE__*/ _jsx("div", {
                                                                 className: "px-2.5 py-1 bg-black/70 backdrop-blur-sm text-white text-xs font-semibold rounded-lg",
-                                                                children: "5:30"
+                                                                children: heroVideos[0]?.duration || "0:00"
                                                             })
                                                         }),
                                                         /*#__PURE__*/ _jsxs("div", {
@@ -473,7 +573,7 @@ export default function App() {
                                                             children: [
                                                                 /*#__PURE__*/ _jsx("h3", {
                                                                     className: "text-white text-lg font-bold mb-1",
-                                                                    children: "Perfect Italian Carbonara"
+                                                                    children: heroVideos[0]?.title || "Perfect Italian Carbonara"
                                                                 }),
                                                                 /*#__PURE__*/ _jsxs("div", {
                                                                     className: "flex items-center gap-3 text-white/90 text-xs",
@@ -493,7 +593,7 @@ export default function App() {
                                                                             children: "•"
                                                                         }),
                                                                         /*#__PURE__*/ _jsx("span", {
-                                                                            children: "234K views"
+                                                                            children: `${heroVideos[0]?.views || "0"} views`
                                                                         })
                                                                     ]
                                                                 })
@@ -510,12 +610,13 @@ export default function App() {
                                                         style: {
                                                             animationDelay: '0.5s'
                                                         },
+                                                        onClick: ()=>heroVideos[1]?.url && window.open(heroVideos[1].url, "_blank", "noopener,noreferrer"),
                                                         children: /*#__PURE__*/ _jsxs("div", {
                                                             className: "relative aspect-video",
                                                             children: [
                                                                 /*#__PURE__*/ _jsx("img", {
-                                                                    src: "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=400&q=80",
-                                                                    alt: "Recipe Video",
+                                                                    src: heroVideos[1]?.thumbnail || "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?auto=format&fit=crop&w=400&q=80",
+                                                                    alt: heroVideos[1]?.title || "Recipe Video",
                                                                     className: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                                                 }),
                                                                 /*#__PURE__*/ _jsx("div", {
@@ -536,11 +637,11 @@ export default function App() {
                                                                     children: [
                                                                         /*#__PURE__*/ _jsx("div", {
                                                                             className: "text-white text-xs font-semibold mb-0.5",
-                                                                            children: "Fluffy Pancakes"
+                                                                            children: heroVideos[1]?.title || "Fluffy Pancakes"
                                                                         }),
                                                                         /*#__PURE__*/ _jsx("div", {
                                                                             className: "text-white/80 text-xs",
-                                                                            children: "4:20"
+                                                                            children: heroVideos[1]?.duration || "0:00"
                                                                         })
                                                                     ]
                                                                 })
@@ -552,12 +653,13 @@ export default function App() {
                                                         style: {
                                                             animationDelay: '0.6s'
                                                         },
+                                                        onClick: ()=>heroVideos[2]?.url && window.open(heroVideos[2].url, "_blank", "noopener,noreferrer"),
                                                         children: /*#__PURE__*/ _jsxs("div", {
                                                             className: "relative aspect-video",
                                                             children: [
                                                                 /*#__PURE__*/ _jsx("img", {
-                                                                    src: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=400&q=80",
-                                                                    alt: "Recipe Video",
+                                                                    src: heroVideos[2]?.thumbnail || "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=400&q=80",
+                                                                    alt: heroVideos[2]?.title || "Recipe Video",
                                                                     className: "w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                                                                 }),
                                                                 /*#__PURE__*/ _jsx("div", {
@@ -578,11 +680,11 @@ export default function App() {
                                                                     children: [
                                                                         /*#__PURE__*/ _jsx("div", {
                                                                             className: "text-white text-xs font-semibold mb-0.5",
-                                                                            children: "Thai Green Curry"
+                                                                            children: heroVideos[2]?.title || "Thai Green Curry"
                                                                         }),
                                                                         /*#__PURE__*/ _jsx("div", {
                                                                             className: "text-white/80 text-xs",
-                                                                            children: "6:15"
+                                                                            children: heroVideos[2]?.duration || "0:00"
                                                                         })
                                                                     ]
                                                                 })
@@ -632,10 +734,11 @@ export default function App() {
                                             }),
                                             /*#__PURE__*/ _jsx("p", {
                                                 className: "text-gray-600 text-sm mb-3",
-                                                children: "0+ Subscribers"
+                                                children: `${youtubeStats.subscriberCount || "0"}+ Subscribers`
                                             }),
                                             /*#__PURE__*/ _jsx(Button, {
                                                 className: "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground shadow hover:bg-primary/90 h-9 px-4 py-2 w-full bg-brand-600 text-white hover:bg-brand-700 mt-auto",
+                                                onClick: ()=>window.open("https://www.youtube.com/@Craivings?sub_confirmation=1", "_blank", "noopener,noreferrer"),
                                                 children: "Subscribe"
                                             })
                                         ]
@@ -748,14 +851,15 @@ export default function App() {
                         children: /*#__PURE__*/ _jsx("div", {
                             className: "flex gap-5 trending-marquee",
                             children: [
-                                ...trendingRecipes,
-                                ...trendingRecipes
+                                ...(youtubeTrending.length > 0 ? youtubeTrending : trendingRecipes),
+                                ...(youtubeTrending.length > 0 ? youtubeTrending : trendingRecipes)
                             ].map((recipe, index)=>/*#__PURE__*/ _jsxs("div", {
                                     className: "flex-[0_0_280px] min-w-0",
                                     key: `${recipe.title}-${index}`,
                                     children: [
                                         /*#__PURE__*/ _jsxs("div", {
-                                            className: "rounded-xl border bg-card text-card-foreground shadow overflow-hidden hover:shadow-xl transition-all duration-500 cursor-pointer group bg-white hover:-translate-y-2",
+                                            className: "rounded-xl border bg-card text-card-foreground shadow overflow-hidden hover:shadow-xl transition-all duration-500 cursor-pointer group bg-white hover:-translate-y-2 h-full",
+                                            onClick: ()=>recipe.url && window.open(recipe.url, "_blank", "noopener,noreferrer"),
                                             children: [
                                                 /*#__PURE__*/ _jsxs("div", {
                                                     className: "relative aspect-square overflow-hidden",
@@ -778,14 +882,14 @@ export default function App() {
                                                     ]
                                                 }),
                                                 /*#__PURE__*/ _jsxs("div", {
-                                                    className: "p-4",
+                                                    className: "p-4 flex flex-col gap-2",
                                                     children: [
                                                         /*#__PURE__*/ _jsx("h3", {
-                                                            className: "text-base font-bold mb-1.5 text-gray-900 group-hover:text-brand-600 transition-colors duration-300",
+                                                            className: "text-base font-bold text-gray-900 group-hover:text-brand-600 transition-colors duration-300 line-clamp-2 min-h-[40px]",
                                                             children: recipe.title
                                                         }),
                                                         /*#__PURE__*/ _jsx("p", {
-                                                            className: "text-xs text-gray-600 mb-3",
+                                                            className: "text-xs text-gray-600 line-clamp-2 min-h-[32px]",
                                                             children: recipe.description
                                                         }),
                                                         /*#__PURE__*/ _jsxs("div", {
@@ -868,7 +972,7 @@ export default function App() {
                                             children: [
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-4xl font-bold text-brand-600 mb-2",
-                                                    children: "21+"
+                                                    children: `${youtubeStats.videoCount || "0"}+`
                                                 }),
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-gray-600",
@@ -881,7 +985,7 @@ export default function App() {
                                             children: [
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-4xl font-bold text-brand-600 mb-2",
-                                                    children: "16+"
+                                                    children: `${youtubeStats.subscriberCount || "0"}+`
                                                 }),
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-gray-600",
@@ -894,7 +998,7 @@ export default function App() {
                                             children: [
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-4xl font-bold text-brand-600 mb-2",
-                                                    children: "8,169+"
+                                                    children: `${youtubeStats.viewCount || "0"}+`
                                                 }),
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-gray-600",
@@ -907,7 +1011,7 @@ export default function App() {
                                             children: [
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-4xl font-bold text-brand-600 mb-2",
-                                                    children: "50%"
+                                                    children: "100%"
                                                 }),
                                                 /*#__PURE__*/ _jsx("div", {
                                                     className: "text-gray-600",
@@ -1205,22 +1309,26 @@ export default function App() {
                                     title: "How AI is Revolutionizing Recipe Creation",
                                     excerpt: "Discover the technology behind our AI-generated cooking videos",
                                     date: "Nov 15, 2025",
-                                    readTime: "5 min"
+                                    readTime: "5 min",
+                                    slug: "how-ai-is-revolutionizing-recipe-creation"
                                 },
                                 {
                                     title: "Behind the Scenes: Creating a Video",
                                     excerpt: "A deep dive into our production workflow from start to finish",
                                     date: "Nov 12, 2025",
-                                    readTime: "7 min"
+                                    readTime: "7 min",
+                                    slug: "behind-the-scenes-creating-a-video"
                                 },
                                 {
                                     title: "Top 10 Most Requested Recipes",
                                     excerpt: "Here's what our community wants to see next",
                                     date: "Nov 8, 2025",
-                                    readTime: "4 min"
+                                    readTime: "4 min",
+                                    slug: "top-10-most-requested-recipes"
                                 }
                             ].map((post, index)=>/*#__PURE__*/ _jsxs(Card, {
                                     className: "p-6 bg-white hover:shadow-xl transition-all cursor-pointer group",
+                                    onClick: ()=>navigate(`/blog-post?slug=${post.slug}`),
                                     children: [
                                         /*#__PURE__*/ _jsxs("div", {
                                             className: "text-sm text-gray-500 mb-3",
@@ -1410,60 +1518,6 @@ export default function App() {
                 })
             }),
             
-            /*#__PURE__*/ _jsxs("section", {
-                className: "py-32 px-6 relative overflow-hidden",
-                children: [
-                    /*#__PURE__*/ _jsx("div", {
-                        className: "absolute inset-0 bg-gradient-to-br from-brand-100 via-white to-brand-50"
-                    }),
-                    /*#__PURE__*/ _jsx("div", {
-                        className: "absolute top-0 right-0 w-96 h-96 bg-brand-300 rounded-full blur-3xl opacity-30"
-                    }),
-                    /*#__PURE__*/ _jsx("div", {
-                        className: "absolute bottom-0 left-0 w-96 h-96 bg-brand-400 rounded-full blur-3xl opacity-20"
-                    }),
-                    /*#__PURE__*/ _jsx("div", {
-                    className: "container mx-auto relative z-10",
-                    children: /*#__PURE__*/ _jsx(Card, {
-                            className: "mx-auto max-w-4xl p-12 md:p-16 bg-white border-white/60 shadow-2xl",
-                            children: /*#__PURE__*/ _jsxs("div", {
-                                className: "text-center",
-                                children: [
-                                    /*#__PURE__*/ _jsx("h2", {
-                                        className: "text-4xl md:text-5xl font-bold mb-6",
-                                        children: "Stay in the Loop"
-                                    }),
-                                    /*#__PURE__*/ _jsx("p", {
-                                        className: "text-xl text-gray-600 mb-10  mx-auto",
-                                        children: "Get weekly updates on our latest AI-generated recipes, behind-the-scenes insights, and exclusive content."
-                                    }),
-                                    /*#__PURE__*/ _jsxs("div", {
-                                        className: "flex flex-col sm:flex-row gap-4  mx-auto",
-                                        children: [
-                                            /*#__PURE__*/ _jsx(Input, {
-                                                type: "email",
-                                                placeholder: "Enter your email address",
-                                                value: email,
-                                                onChange: (e)=>setEmail(e.target.value),
-                                                className: "h-14 text-lg px-6 border-2 border-gray-200 focus:border-brand-400 rounded-xl"
-                                            }),
-                                            /*#__PURE__*/ _jsx(Button, {
-                                                size: "lg",
-                                                className: "h-14 px-8 bg-gradient-to-r from-brand-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white rounded-xl text-lg font-semibold shadow-lg hover:shadow-xl transition-all",
-                                                children: "Subscribe"
-                                            })
-                                        ]
-                                    }),
-                                    /*#__PURE__*/ _jsx("p", {
-                                        className: "text-sm text-gray-500 mt-4",
-                                        children: "Join 0+ food enthusiasts and tech innovators"
-                                    })
-                                ]
-                            })
-                        })
-                    })
-                ]
-            }),
             /*#__PURE__*/ _jsx("footer", {
                 className: "bg-gray-900 text-white py-16 px-6",
                 children: /*#__PURE__*/ _jsxs("div", {
@@ -1579,46 +1633,46 @@ export default function App() {
                                         })
                                     ]
                                 }),
-                                /*#__PURE__*/ _jsxs("div", {
-                                    children: [
-                                        /*#__PURE__*/ _jsx("h4", {
-                                            className: "font-semibold mb-4 text-lg",
-                                            children: "Resources"
-                                        }),
-                                        /*#__PURE__*/ _jsxs("ul", {
-                                            className: "space-y-3 text-gray-400",
-                                            children: [
-                                                /*#__PURE__*/ _jsx("li", {
-                                                    children: /*#__PURE__*/ _jsx("a", {
-                                                        href: "#",
-                                                        className: "hover:text-brand-400 transition-colors",
-                                                        children: "Our Process"
+                                /*#__PURE__*/ _jsx("div", {
+                                    className: "space-y-6",
+                                    children: /*#__PURE__*/ _jsxs("div", {
+                                        children: [
+                                            /*#__PURE__*/ _jsx("h3", {
+                                                className: "text-xl font-semibold text-white mb-4 border-b border-white/20 pb-3",
+                                                children: "Stay Connected"
+                                            }),
+                                            /*#__PURE__*/ _jsx("p", {
+                                                className: "text-white/80 mb-6 leading-relaxed",
+                                                children: "Join our community for updates, sustainability tips, and exclusive offers."
+                                            }),
+                                            /*#__PURE__*/ _jsxs("form", {
+                                                onSubmit: handleNewsletterSubmit,
+                                                className: "space-y-3",
+                                                children: [
+                                                    /*#__PURE__*/ _jsx("label", {
+                                                        htmlFor: "home-footer-newsletter-email",
+                                                        className: "sr-only",
+                                                        children: "Your email address"
+                                                    }),
+                                                    /*#__PURE__*/ _jsx(Input, {
+                                                        id: "home-footer-newsletter-email",
+                                                        type: "email",
+                                                        placeholder: "Your email address",
+                                                        value: email,
+                                                        onChange: (e)=>setEmail(e.target.value),
+                                                        className: "w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500",
+                                                        required: true
+                                                    }),
+                                                    /*#__PURE__*/ _jsx(Button, {
+                                                        type: "submit",
+                                                        className: "w-full px-4 py-2.5 bg-brand-600 text-white font-semibold rounded-md hover:bg-brand-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white",
+                                                        disabled: subscribing,
+                                                        children: subscribing ? "Subscribing..." : "Subscribe"
                                                     })
-                                                }),
-                                                /*#__PURE__*/ _jsx("li", {
-                                                    children: /*#__PURE__*/ _jsx("a", {
-                                                        href: "#",
-                                                        className: "hover:text-brand-400 transition-colors",
-                                                        children: "Technology"
-                                                    })
-                                                }),
-                                                /*#__PURE__*/ _jsx("li", {
-                                                    children: /*#__PURE__*/ _jsx("a", {
-                                                        href: "#",
-                                                        className: "hover:text-brand-400 transition-colors",
-                                                        children: "FAQ"
-                                                    })
-                                                }),
-                                                /*#__PURE__*/ _jsx("li", {
-                                                    children: /*#__PURE__*/ _jsx("a", {
-                                                        href: "#",
-                                                        className: "hover:text-brand-400 transition-colors",
-                                                        children: "Partner With Us"
-                                                    })
-                                                })
-                                            ]
-                                        })
-                                    ]
+                                                ]
+                                            })
+                                        ]
+                                    })
                                 })
                             ]
                         }),

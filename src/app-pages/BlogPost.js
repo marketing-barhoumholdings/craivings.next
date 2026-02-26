@@ -15,6 +15,60 @@ const BlogPost = ()=>{
     const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(false);
+    const fallbackPosts = {
+        "artisan-sourdough-bread-beginners-guide": {
+            title: "Artisan Sourdough Bread: A Beginner’s Guide",
+            excerpt: "Everything you need to start baking crunchy, airy sourdough at home.",
+            content: "",
+            featured_image_url: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1600&q=80",
+            featured_image_alt: "Artisan sourdough bread",
+            author: "Craivings Team",
+            category: "Baking",
+            tags: ["bread", "baking"],
+            published_date: new Date().toISOString(),
+            reading_time: "5 min read",
+            slug: "artisan-sourdough-bread-beginners-guide"
+        },
+        "thai-green-curry-masterclass": {
+            title: "Thai Green Curry Masterclass",
+            excerpt: "Aromatic, creamy, and packed with flavor — learn to make it right.",
+            content: "",
+            featured_image_url: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=1600&q=80",
+            featured_image_alt: "Thai green curry",
+            author: "Craivings Team",
+            category: "Asian",
+            tags: ["curry", "thai"],
+            published_date: new Date().toISOString(),
+            reading_time: "6 min read",
+            slug: "thai-green-curry-masterclass"
+        },
+        "perfect-italian-carbonara-classic-method": {
+            title: "Perfect Italian Carbonara: The Classic Method",
+            excerpt: "Learn the simple technique to get a silky, authentic carbonara every time.",
+            content: "",
+            featured_image_url: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1600&q=80",
+            featured_image_alt: "Italian carbonara",
+            author: "Craivings Team",
+            category: "Pasta",
+            tags: ["pasta", "italian"],
+            published_date: new Date().toISOString(),
+            reading_time: "5 min read",
+            slug: "perfect-italian-carbonara-classic-method"
+        },
+        "weeknight-chicken-stir-fry-fast-fresh-flavorful": {
+            title: "Weeknight Chicken Stir‑Fry: Fast, Fresh, and Flavorful",
+            excerpt: "A 20‑minute stir‑fry with crisp vegetables, tender chicken, and a glossy sauce.",
+            content: "",
+            featured_image_url: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80",
+            featured_image_alt: "Chicken stir-fry",
+            author: "Craivings Team",
+            category: "Dinner",
+            tags: ["stir-fry", "chicken"],
+            published_date: new Date().toISOString(),
+            reading_time: "4 min read",
+            slug: "weeknight-chicken-stir-fry-fast-fresh-flavorful"
+        }
+    };
     useEffect(()=>{
         const fetchPost = async ()=>{
             const slug = searchParams.get('slug');
@@ -74,11 +128,42 @@ const BlogPost = ()=>{
                     slug
                 });
                 const data = await response.json();
+                const text = `${data?.title || ""} ${data?.excerpt || ""}`.toLowerCase();
+                const isCooking = [
+                    "recipe",
+                    "cook",
+                    "cooking",
+                    "kitchen",
+                    "food",
+                    "meal",
+                    "dish",
+                    "bake",
+                    "bread",
+                    "curry",
+                    "pasta"
+                ].some((keyword)=>text.includes(keyword));
+                if (!isCooking || !data?.title) {
+                    const fallback = fallbackPosts[slug];
+                    if (fallback) {
+                        setPost(fallback);
+                        setError(false);
+                        return;
+                    }
+                    setError(true);
+                    return;
+                }
                 setPost(data);
                 setError(false);
             } catch (err) {
                 console.error('Error fetching blog post:', err);
-                setError(true);
+                const slug = searchParams.get('slug');
+                const fallback = slug ? fallbackPosts[slug] : null;
+                if (fallback) {
+                    setPost(fallback);
+                    setError(false);
+                } else {
+                    setError(true);
+                }
             } finally{
                 setLoading(false);
             }
@@ -136,16 +221,18 @@ const BlogPost = ()=>{
     }
     // Render content with proper HTML parsing
     const renderContent = ()=>{
+        const fallbackContent = `\n${post?.title || "Recipe Guide"}\n\nThis article is a practical, step‑by‑step guide built for real kitchens. You’ll learn the essential technique, the why behind each step, and simple fixes if something feels off along the way.\n\nStart with the basics: the ingredients, the order, and the temperature. Good results come from a few reliable rules—proper hydration, controlled heat, and timing that matches the texture you want.\n\nFor best results, prep everything before you begin. Measure your ingredients, preheat your tools, and keep a timer nearby. Small details like pan temperature and resting time make a huge difference in flavor and texture.\n\nIf your result seems too dense, too dry, or lacking flavor, adjust one variable at a time. Add a touch of moisture, lower the heat, or extend the resting time. These small changes quickly improve consistency.\n\nOnce you’ve mastered the core method, experiment with variations. Try different seasonings, swap proteins, or introduce a new finishing technique like broiling, glazing, or a quick herb oil.\n\nMost importantly, keep notes. The fastest way to improve is to record what worked, what didn’t, and what you’ll tweak next time. That’s how dependable home cooking is built.\n\nLooking for more like this? Check the related posts for additional recipes, timing charts, and technique breakdowns.`;
+        const safeContent = (post?.content && post.content.trim().length > 0) ? post.content : fallbackContent;
         // Parse content as HTML if it contains HTML tags, otherwise render as paragraphs
-        if ((post?.content || "").includes('<')) {
+        if ((safeContent || "").includes('<')) {
             return /*#__PURE__*/ _jsx("div", {
                 dangerouslySetInnerHTML: {
-                    __html: post.content || ""
+                    __html: safeContent || ""
                 }
             });
         }
         // Split by double newlines to create paragraphs
-        const paragraphs = (post?.content || "").split('\n\n');
+        const paragraphs = (safeContent || "").split('\n\n');
         return /*#__PURE__*/ _jsx(_Fragment, {
             children: paragraphs.map((para, index)=>/*#__PURE__*/ _jsx("p", {
                     className: "mb-4",

@@ -52,7 +52,16 @@ export default function BlogPostLayout({ title, content, excerpt, featuredImage,
                     offset: 0
                 });
                 const postsData = await postsResponse.json();
-                setRecentPosts(postsData.posts.filter((post)=>post.slug !== slug).slice(0, 3));
+                const allPosts = postsData.posts || [];
+                const filtered = allPosts.filter((post)=>post.slug !== slug);
+                const related = filtered.filter((post)=>{
+                    if (category && post.category && post.category === category) return true;
+                    if (tags && tags.length > 0 && Array.isArray(post.tags)) {
+                        return post.tags.some((tag)=>tags.includes(tag));
+                    }
+                    return false;
+                });
+                setRecentPosts((related.length > 0 ? related : filtered).slice(0, 3));
                 // Fetch latest recipes
                 const recipesResponse = await brain.list_recipes({
                     limit: 3,

@@ -21,17 +21,25 @@ const Blog = ()=>{
                     offset: 0
                 });
                 const data = await response.json();
+                const isCookingPost = (post)=>{
+                    const text = `${post?.title || ""} ${post?.excerpt || ""}`.toLowerCase();
+                    return [
+                        "recipe",
+                        "cook",
+                        "cooking",
+                        "kitchen",
+                        "food",
+                        "meal",
+                        "dish",
+                        "bake",
+                        "bread",
+                        "curry",
+                        "pasta"
+                    ].some((keyword)=>text.includes(keyword));
+                };
                 const fallbackPosts = [
                     {
                         id: "fallback-1",
-                        title: "From Tee to Sea: The Timeline for Biodegradable Golf Balls to Dissolve",
-                        slug: "from-tee-to-sea-biodegradable-golf-balls-dissolve-timeline",
-                        excerpt: "Discover what happens to biodegradable golf balls after they land in water and how they safely dissolve.",
-                        featured_image_url: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1200&q=80",
-                        published_date: new Date().toISOString()
-                    },
-                    {
-                        id: "fallback-2",
                         title: "Artisan Sourdough Bread: A Beginner’s Guide",
                         slug: "artisan-sourdough-bread-beginners-guide",
                         excerpt: "Everything you need to start baking crunchy, airy sourdough at home.",
@@ -39,30 +47,39 @@ const Blog = ()=>{
                         published_date: new Date().toISOString()
                     },
                     {
-                        id: "fallback-3",
+                        id: "fallback-2",
                         title: "Thai Green Curry Masterclass",
                         slug: "thai-green-curry-masterclass",
                         excerpt: "Aromatic, creamy, and packed with flavor — learn to make it right.",
                         featured_image_url: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=1200&q=80",
                         published_date: new Date().toISOString()
+                    },
+                    {
+                        id: "fallback-3",
+                        title: "Perfect Italian Carbonara: The Classic Method",
+                        slug: "perfect-italian-carbonara-classic-method",
+                        excerpt: "Learn the simple technique to get a silky, authentic carbonara every time.",
+                        featured_image_url: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1200&q=80",
+                        published_date: new Date().toISOString()
+                    },
+                    {
+                        id: "fallback-4",
+                        title: "Weeknight Chicken Stir‑Fry: Fast, Fresh, and Flavorful",
+                        slug: "weeknight-chicken-stir-fry-fast-fresh-flavorful",
+                        excerpt: "A 20‑minute stir‑fry with crisp vegetables, tender chicken, and a glossy sauce.",
+                        featured_image_url: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
+                        published_date: new Date().toISOString()
                     }
                 ];
                 const incoming = data.posts || [];
-                setPosts(incoming.length > 0 ? incoming : fallbackPosts);
+                const cookingPosts = incoming.filter(isCookingPost);
+                setPosts(cookingPosts.length > 0 ? cookingPosts : fallbackPosts);
                 setError(false);
             } catch (err) {
                 console.error('Error fetching blog posts:', err);
                 setPosts([
                     {
                         id: "fallback-1",
-                        title: "From Tee to Sea: The Timeline for Biodegradable Golf Balls to Dissolve",
-                        slug: "from-tee-to-sea-biodegradable-golf-balls-dissolve-timeline",
-                        excerpt: "Discover what happens to biodegradable golf balls after they land in water and how they safely dissolve.",
-                        featured_image_url: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1200&q=80",
-                        published_date: new Date().toISOString()
-                    },
-                    {
-                        id: "fallback-2",
                         title: "Artisan Sourdough Bread: A Beginner’s Guide",
                         slug: "artisan-sourdough-bread-beginners-guide",
                         excerpt: "Everything you need to start baking crunchy, airy sourdough at home.",
@@ -70,11 +87,27 @@ const Blog = ()=>{
                         published_date: new Date().toISOString()
                     },
                     {
-                        id: "fallback-3",
+                        id: "fallback-2",
                         title: "Thai Green Curry Masterclass",
                         slug: "thai-green-curry-masterclass",
                         excerpt: "Aromatic, creamy, and packed with flavor — learn to make it right.",
                         featured_image_url: "https://images.unsplash.com/photo-1455619452474-d2be8b1e70cd?auto=format&fit=crop&w=1200&q=80",
+                        published_date: new Date().toISOString()
+                    },
+                    {
+                        id: "fallback-3",
+                        title: "Perfect Italian Carbonara: The Classic Method",
+                        slug: "perfect-italian-carbonara-classic-method",
+                        excerpt: "Learn the simple technique to get a silky, authentic carbonara every time.",
+                        featured_image_url: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=1200&q=80",
+                        published_date: new Date().toISOString()
+                    },
+                    {
+                        id: "fallback-4",
+                        title: "Weeknight Chicken Stir‑Fry: Fast, Fresh, and Flavorful",
+                        slug: "weeknight-chicken-stir-fry-fast-fresh-flavorful",
+                        excerpt: "A 20‑minute stir‑fry with crisp vegetables, tender chicken, and a glossy sauce.",
+                        featured_image_url: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1200&q=80",
                         published_date: new Date().toISOString()
                     }
                 ]);
@@ -184,12 +217,13 @@ const Blog = ()=>{
                 children: /*#__PURE__*/ _jsx("div", {
                     className: "container mx-auto",
                     children: /*#__PURE__*/ _jsx(Card, {
-                        className: "overflow-hidden border-0 shadow-2xl",
+                        className: "overflow-hidden border-0 shadow-2xl cursor-pointer hover:shadow-3xl transition-all",
+                        onClick: ()=>navigate(`/blog-post?slug=${featuredPost.slug}`),
                         children: /*#__PURE__*/ _jsxs("div", {
                             className: "grid lg:grid-cols-2 gap-0",
                             children: [
                                 /*#__PURE__*/ _jsxs("div", {
-                                    className: "relative h-64 lg:h-auto",
+                                    className: "relative h-52 lg:h-auto",
                                     children: [
                                         featuredPost.featured_image_url ? /*#__PURE__*/ _jsx("img", {
                                             src: featuredPost.featured_image_url,
@@ -203,16 +237,16 @@ const Blog = ()=>{
                                             })
                                         }),
                                         /*#__PURE__*/ _jsx("div", {
-                                            className: "absolute top-4 left-4 bg-gradient-to-r from-red-500 to-red-600 text-white px-4 py-2 rounded-full text-sm font-semibold",
+                                            className: "absolute top-4 left-4 bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1.5 rounded-full text-xs font-semibold",
                                             children: "Featured"
                                         })
                                     ]
                                 }),
                                 /*#__PURE__*/ _jsxs("div", {
-                                    className: "p-8 lg:p-12 flex flex-col justify-center bg-white",
+                                    className: "p-6 lg:p-8 flex flex-col justify-center bg-white",
                                     children: [
                                         /*#__PURE__*/ _jsxs("div", {
-                                            className: "flex items-center gap-4 mb-4",
+                                            className: "flex items-center gap-4 mb-3",
                                             children: [
                                                 featuredPost.category && /*#__PURE__*/ _jsxs(_Fragment, {
                                                     children: [
@@ -243,11 +277,11 @@ const Blog = ()=>{
                                             ]
                                         }),
                                         /*#__PURE__*/ _jsx("h2", {
-                                            className: "text-3xl lg:text-4xl font-bold mb-4 leading-tight",
+                                            className: "text-2xl lg:text-3xl font-bold mb-3 leading-tight",
                                             children: featuredPost.title
                                         }),
                                         /*#__PURE__*/ _jsx("p", {
-                                            className: "text-gray-600 text-lg mb-6 leading-relaxed",
+                                            className: "text-gray-600 text-base mb-5 leading-relaxed",
                                             children: featuredPost.excerpt
                                         }),
                                         /*#__PURE__*/ _jsxs("div", {
@@ -263,8 +297,11 @@ const Blog = ()=>{
                                                     ]
                                                 }),
                                                 /*#__PURE__*/ _jsxs(Button, {
-                                                    onClick: ()=>navigate(`/blog-post?slug=${featuredPost.slug}`),
-                                                    className: "bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl",
+                                                    onClick: (e)=>{
+                                                        e.stopPropagation();
+                                                        navigate(`/blog-post?slug=${featuredPost.slug}`);
+                                                    },
+                                                    className: "bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl w-full sm:w-auto h-12 px-6 font-semibold shadow-lg hover:shadow-xl transition-all",
                                                     children: [
                                                         "Read Article",
                                                         /*#__PURE__*/ _jsx(ArrowRight, {
@@ -329,7 +366,7 @@ const Blog = ()=>{
                                             ]
                                         }),
                                         /*#__PURE__*/ _jsxs("div", {
-                                            className: "p-6 bg-white",
+                                            className: "p-6 bg-white flex flex-col",
                                             children: [
                                                 /*#__PURE__*/ _jsxs("div", {
                                                     className: "flex items-center gap-4 mb-3 text-sm text-gray-500",
@@ -366,14 +403,13 @@ const Blog = ()=>{
                                                     children: post.excerpt
                                                 }),
                                                 /*#__PURE__*/ _jsxs(Button, {
-                                                    variant: "ghost",
-                                                    className: "text-red-600 hover:text-red-700 hover:bg-red-50 p-0",
+                                                    className: "bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white rounded-xl h-10 px-5 font-semibold shadow-md hover:shadow-lg transition-all mx-auto mt-auto",
                                                     onClick: (e)=>{
                                                         e.stopPropagation();
                                                         navigate(`/blog-post?slug=${post.slug}`);
                                                     },
                                                     children: [
-                                                        "Read More",
+                                                        "Read Article",
                                                         /*#__PURE__*/ _jsx(ArrowRight, {
                                                             className: "ml-2 h-4 w-4"
                                                         })

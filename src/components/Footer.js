@@ -148,46 +148,46 @@ export const Footer = ()=>{
                                 })
                             ]
                         }),
-                        /*#__PURE__*/ _jsxs("div", {
-                            children: [
-                                /*#__PURE__*/ _jsx("h4", {
-                                    className: "font-semibold mb-4 text-lg",
-                                    children: "Resources"
-                                }),
-                                /*#__PURE__*/ _jsxs("ul", {
-                                    className: "space-y-3 text-gray-400",
-                                    children: [
-                                        /*#__PURE__*/ _jsx("li", {
-                                            children: /*#__PURE__*/ _jsx("a", {
-                                                href: "#",
-                                                className: "hover:text-brand-400 transition-colors",
-                                                children: "Our Process"
+                        /*#__PURE__*/ _jsx("div", {
+                            className: "space-y-6",
+                            children: /*#__PURE__*/ _jsxs("div", {
+                                children: [
+                                    /*#__PURE__*/ _jsx("h3", {
+                                        className: "text-xl font-semibold text-white mb-4 border-b border-white/20 pb-3",
+                                        children: "Stay Connected"
+                                    }),
+                                    /*#__PURE__*/ _jsx("p", {
+                                        className: "text-white/80 mb-6 leading-relaxed",
+                                        children: "Join our community for updates, sustainability tips, and exclusive offers."
+                                    }),
+                                    /*#__PURE__*/ _jsxs("form", {
+                                        onSubmit: handleNewsletterSubmit,
+                                        className: "space-y-3",
+                                        children: [
+                                            /*#__PURE__*/ _jsx("label", {
+                                                htmlFor: "footer-newsletter-email",
+                                                className: "sr-only",
+                                                children: "Your email address"
+                                            }),
+                                            /*#__PURE__*/ _jsx(Input, {
+                                                id: "footer-newsletter-email",
+                                                type: "email",
+                                                placeholder: "Your email address",
+                                                value: email,
+                                                onChange: (e)=>setEmail(e.target.value),
+                                                className: "w-full px-4 py-2 rounded-md bg-white/10 border border-white/20 text-white placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-brand-500",
+                                                required: true
+                                            }),
+                                            /*#__PURE__*/ _jsx(Button, {
+                                                type: "submit",
+                                                className: "w-full px-4 py-2.5 bg-brand-600 text-white font-semibold rounded-md hover:bg-brand-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-900 focus:ring-white",
+                                                disabled: subscribing,
+                                                children: subscribing ? "Subscribing..." : "Subscribe"
                                             })
-                                        }),
-                                        /*#__PURE__*/ _jsx("li", {
-                                            children: /*#__PURE__*/ _jsx("a", {
-                                                href: "#",
-                                                className: "hover:text-brand-400 transition-colors",
-                                                children: "Technology"
-                                            })
-                                        }),
-                                        /*#__PURE__*/ _jsx("li", {
-                                            children: /*#__PURE__*/ _jsx("a", {
-                                                href: "#",
-                                                className: "hover:text-brand-400 transition-colors",
-                                                children: "FAQ"
-                                            })
-                                        }),
-                                        /*#__PURE__*/ _jsx("li", {
-                                            children: /*#__PURE__*/ _jsx("a", {
-                                                href: "#",
-                                                className: "hover:text-brand-400 transition-colors",
-                                                children: "Partner With Us"
-                                            })
-                                        })
-                                    ]
-                                })
-                            ]
+                                        ]
+                                    })
+                                ]
+                            })
                         })
                     ]
                 }),
