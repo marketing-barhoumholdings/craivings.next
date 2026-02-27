@@ -330,10 +330,13 @@ export default function App() {
             url: video.url,
             views: video.views
         })) : [];
-    const handleRecipeRequest = async (e)=>{
+    const handleRecipeRequest = (e)=>{
         e.preventDefault();
-        console.log("Recipe request:", recipeRequest);
-        toast.success("Thanks for your suggestion! We'll consider it for future videos.");
+        const subject = `Recipe Request: ${recipeRequest.recipe || "Craivings suggestion"}`;
+        const body = `Name: ${recipeRequest.name || ""}\nRecipe: ${recipeRequest.recipe || ""}\n\nDetails:\n${recipeRequest.message || ""}`;
+        const mailto = `mailto:info@craivings.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailto;
+        toast.success("Opening your email client to send the request.");
         setRecipeRequest({
             name: "",
             recipe: "",

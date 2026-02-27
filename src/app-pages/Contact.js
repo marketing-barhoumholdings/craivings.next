@@ -34,11 +34,13 @@ const Contact = ()=>{
     const handleSubmit = (e)=>{
         e.preventDefault();
         setSubmitting(true);
-        // Handle form submission
-        console.log("Form submitted:", formData);
+        const subject = formData.subject || "Craivings Contact Form";
+        const body = `Name: ${formData.name || ""}\nEmail: ${formData.email || ""}\n\nMessage:\n${formData.message || ""}`;
+        const mailto = `mailto:info@craivings.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailto;
         setTimeout(()=>{
             setSubmitting(false);
-        }, 2000);
+        }, 500);
     };
     const socialLinks = [
         {
