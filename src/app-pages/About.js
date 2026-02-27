@@ -162,7 +162,7 @@ const About = ()=>{
                         className: "grid lg:grid-cols-2 gap-16 items-center",
                         children: [
                             /*#__PURE__*/ _jsx("div", {
-                                className: "lg:-mt-[7.5rem]",
+                                className: "lg:-mt-[7.5rem] lg:order-2",
                                 children: /*#__PURE__*/ _jsx("img", {
                                     src: "https://images.unsplash.com/photo-1506368249639-73a05d6f6488?auto=format&fit=crop&w=1200&q=80",
                                     alt: "Our Vision cooking",
@@ -170,6 +170,7 @@ const About = ()=>{
                                 })
                             }),
                             /*#__PURE__*/ _jsxs("div", {
+                                className: "lg:order-1",
                                 children: [
                                     /*#__PURE__*/ _jsx("h2", {
                                         className: "text-5xl font-bold mb-6 leading-tight",
@@ -236,56 +237,6 @@ const About = ()=>{
                     })
                 })
             }),
-            /*#__PURE__*/ _jsxs("section", {
-                className: "py-20 px-4 bg-gradient-to-br from-gray-900 to-gray-800 text-white relative overflow-hidden",
-                children: [
-                    /*#__PURE__*/ _jsxs("div", {
-                        className: "absolute inset-0 opacity-10",
-                        children: [
-                            /*#__PURE__*/ _jsx("div", {
-                                className: "absolute top-0 left-1/4 w-96 h-96 bg-brand-500 rounded-full blur-3xl"
-                            }),
-                            /*#__PURE__*/ _jsx("div", {
-                                className: "absolute bottom-0 right-1/4 w-96 h-96 bg-brand-600 rounded-full blur-3xl"
-                            })
-                        ]
-                    }),
-                    /*#__PURE__*/ _jsxs("div", {
-                        className: "container mx-auto relative z-10",
-                        children: [
-                            /*#__PURE__*/ _jsxs("div", {
-                                className: "text-center mb-16",
-                                children: [
-                                    /*#__PURE__*/ _jsx("h2", {
-                                        className: "text-5xl font-bold mb-4",
-                                        children: "By the Numbers"
-                                    }),
-                                    /*#__PURE__*/ _jsx("p", {
-                                        className: "text-xl text-gray-300",
-                                        children: "Our impact in the AI content creation space"
-                                    })
-                                ]
-                            }),
-                            /*#__PURE__*/ _jsx("div", {
-                                className: "grid md:grid-cols-2 lg:grid-cols-4 gap-8",
-                                children: milestones.map((milestone, index)=>/*#__PURE__*/ _jsxs(Card, {
-                                        className: "p-8 bg-white/5 backdrop-blur-md border-white/10 text-center",
-                                        children: [
-                                            /*#__PURE__*/ _jsx("div", {
-                                                className: "text-5xl font-bold text-brand-400 mb-2",
-                                                children: milestone.number
-                                            }),
-                                            /*#__PURE__*/ _jsx("div", {
-                                                className: "text-gray-300 text-lg",
-                                                children: milestone.label
-                                            })
-                                        ]
-                                    }, index))
-                            })
-                        ]
-                    })
-                ]
-            }),
             /*#__PURE__*/ _jsx("section", {
                 className: "py-20 px-4",
                 children: /*#__PURE__*/ _jsxs("div", {
@@ -327,82 +278,6 @@ const About = ()=>{
                                 }, index))
                         })
                     ]
-                })
-            }),
-            /*#__PURE__*/ _jsx("section", {
-                className: "py-20 px-4 bg-gradient-to-br from-red-50 to-white",
-                children: /*#__PURE__*/ _jsxs("div", {
-                    className: "container mx-auto",
-                    children: [
-                        /*#__PURE__*/ _jsxs("div", {
-                            className: "text-center mb-16",
-                            children: [
-                                /*#__PURE__*/ _jsx("h2", {
-                                    className: "text-5xl font-bold mb-4",
-                                    children: "Our Technology"
-                                }),
-                                /*#__PURE__*/ _jsx("p", {
-                                    className: "text-xl text-gray-600 max-w-2xl mx-auto",
-                                    children: "The AI tools and platforms powering our production pipeline"
-                                })
-                            ]
-                        }),
-                        /*#__PURE__*/ _jsx("div", {
-                            className: "grid md:grid-cols-2 lg:grid-cols-4 gap-8",
-                            children: techStack.map((tech, index)=>/*#__PURE__*/ _jsxs(Card, {
-                                    className: "p-6 border-0 shadow-lg hover:shadow-xl transition-all bg-white/60 backdrop-blur-sm text-center group hover:scale-105",
-                                    children: [
-                                        /*#__PURE__*/ _jsx("div", {
-                                            className: "w-14 h-14 bg-gradient-to-br from-red-400 to-red-600 rounded-xl flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform",
-                                            children: /*#__PURE__*/ _jsx(tech.icon, {
-                                                className: "h-7 w-7 text-white"
-                                            })
-                                        }),
-                                        /*#__PURE__*/ _jsx("h3", {
-                                            className: "text-xl font-bold mb-2",
-                                            children: tech.name
-                                        }),
-                                        /*#__PURE__*/ _jsx("p", {
-                                            className: "text-gray-600",
-                                            children: tech.description
-                                        })
-                                    ]
-                                }, index))
-                        })
-                    ]
-                })
-            }),
-            /*#__PURE__*/ _jsx("section", {
-                className: "py-20 px-4",
-                children: /*#__PURE__*/ _jsx("div", {
-                    className: "container mx-auto max-w-4xl",
-                    children: /*#__PURE__*/ _jsxs(Card, {
-                        className: "p-12 md:p-16 bg-white/40 backdrop-blur-xl border-white/60 shadow-2xl",
-                        children: [
-                            /*#__PURE__*/ _jsx("h2", {
-                                className: "text-4xl font-bold mb-6 text-center",
-                                children: "Why AI? Why Now?"
-                            }),
-                            /*#__PURE__*/ _jsxs("div", {
-                                className: "space-y-6 text-gray-700 text-lg leading-relaxed",
-                                children: [
-                                    /*#__PURE__*/ _jsx("p", {
-                                        children: "Traditional recipe videos require filming crews, kitchens, ingredients, and extensive post-production. This limits creativity, increases costs, and restricts the volume of content that can be produced."
-                                    }),
-                                    /*#__PURE__*/ _jsx("p", {
-                                        children: "With AI, we can generate unlimited variations, experiment with impossible scenarios, and produce at a scale previously unimaginable. We can create videos for rare cuisines, complex techniques, and niche diets without the logistical nightmares of traditional production."
-                                    }),
-                                    /*#__PURE__*/ _jsx("p", {
-                                        children: "But most importantly: AI allows us to focus on what matters — great recipes, beautiful visuals, and engaging storytelling. The technology handles the heavy lifting, freeing us to be more creative, not less."
-                                    }),
-                                    /*#__PURE__*/ _jsx("p", {
-                                        className: "text-brand-600 font-semibold text-xl",
-                                        children: "We're not replacing chefs. We're democratizing culinary knowledge through technology."
-                                    })
-                                ]
-                            })
-                        ]
-                    })
                 })
             }),
             /*#__PURE__*/ _jsx(Footer, {})

@@ -122,46 +122,21 @@ const Recipes = ()=>{
     useEffect(()=>{
         const fetchYoutubeVideos = async ()=>{
             try {
-                const apiKey = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || process.env.YOUTUBE_API_KEY;
-                const channelId = process.env.NEXT_PUBLIC_YOUTUBE_CHANNEL_ID || process.env.YOUTUBE_CHANNEL_ID;
-                if (!apiKey || !channelId) return;
-                const searchRes = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${channelId}&maxResults=24&order=date&type=video&key=${apiKey}`);
-                const searchData = await searchRes.json();
-                const items = searchData.items || [];
-                if (items.length === 0) return;
-                const videoIds = items.map((item)=>item.id.videoId).join(",");
-                const detailsRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=contentDetails,statistics&id=${videoIds}&key=${apiKey}`);
-                const detailsData = await detailsRes.json();
-                const detailsMap = new Map((detailsData.items || []).map((item)=>[
-                        item.id,
-                        item
-                    ]));
-                const formatDuration = (iso)=>{
-                    if (!iso) return "0:00";
-                    const match = iso.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-                    const h = parseInt(match?.[1] || "0", 10);
-                    const m = parseInt(match?.[2] || "0", 10);
-                    const s = parseInt(match?.[3] || "0", 10);
-                    const totalMinutes = h * 60 + m;
-                    return `${totalMinutes}:${s.toString().padStart(2, "0")}`;
-                };
-                const mapped = items.map((item, idx)=>{
-                    const details = detailsMap.get(item.id.videoId);
-                    const duration = formatDuration(details?.contentDetails?.duration);
-                    const views = details?.statistics?.viewCount ? Number(details.statistics.viewCount).toLocaleString() : "0";
-                    return {
-                        id: item.id.videoId || idx + 1,
-                        title: item.snippet?.title || "Video",
-                        slug: item.id.videoId,
-                        featured_image_url: item.snippet?.thumbnails?.high?.url || item.snippet?.thumbnails?.medium?.url,
-                        total_time: duration,
-                        views,
+                const response = await fetch("/api/youtube?maxResults=24");
+                const data = await response.json();
+                if (!Array.isArray(data.videos) || data.videos.length === 0) return;
+                const mapped = data.videos.map((video)=>({
+                        id: video.id,
+                        title: video.title,
+                        slug: video.id,
+                        featured_image_url: video.thumbnail,
+                        total_time: video.duration,
+                        views: video.views,
                         category: "Video",
                         rating: "0",
                         difficulty: "Medium",
-                        url: `https://www.youtube.com/watch?v=${item.id.videoId}`
-                    };
-                });
+                        url: video.url
+                    }));
                 setYoutubeVideos(mapped);
                 setRecipes(mapped);
             } catch (error) {
