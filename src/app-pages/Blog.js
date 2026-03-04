@@ -152,6 +152,14 @@ const Blog = ()=>{
                                     children: "Our Blog"
                                 })
                             }),
+                            /*#__PURE__*/ _jsx("p", {
+                                className: "text-xl text-gray-600 max-w-3xl mx-auto",
+                                children: "Insights, stories, and updates from the frontier of AI-powered culinary content creation."
+                            })
+                        ]
+                    })
+                })
+            }),
             /*#__PURE__*/ _jsx("section", {
                 className: "py-24 px-4",
                 children: /*#__PURE__*/ _jsx("div", {
