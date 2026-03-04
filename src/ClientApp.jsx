@@ -7,6 +7,7 @@ import Recipes from "./app-pages/Recipes";
 import Blog from "./app-pages/Blog";
 import BlogPost from "./app-pages/BlogPost";
 
+
 const NotFound = () => /*#__PURE__*/ _jsx("div", {
   className: "min-h-screen flex items-center justify-center bg-gradient-to-b from-[#FFF9F3] to-white",
   children: /*#__PURE__*/ _jsxs("div", {
