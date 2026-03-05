@@ -1,30 +1,32 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
-import { Youtube, Instagram, Twitter, Mail } from "lucide-react";
+import { Youtube, Instagram, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import brain from "brain";
 import { toast } from "sonner";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 export const Footer = ()=>{
     const [email, setEmail] = useState("");
-    const [name, setName] = useState("");
     const [subscribing, setSubscribing] = useState(false);
     const handleNewsletterSubmit = async (e)=>{
         e.preventDefault();
         setSubscribing(true);
         try {
-            const response = await brain.subscribe_newsletter({
-                email: email,
-                name: name || undefined
+            const response = await fetch("/api/subscribe", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email: email
+                })
             });
             const data = await response.json();
             if (data.success) {
-                toast.success(data.message || "Successfully subscribed to newsletter!");
+                toast.success("Successfully subscribed!");
                 setEmail("");
-                setName("");
             } else {
-                toast.error("Failed to subscribe. Please try again.");
+                toast.error(data.error || "Failed to subscribe. Please try again.");
             }
         } catch (error) {
             console.error("Error subscribing to newsletter:", error);

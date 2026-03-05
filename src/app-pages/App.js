@@ -51,15 +51,21 @@ export default function App() {
         setIsSubmitting(true);
         setSubscribing(true);
         try {
-            const response = await brain.subscribe_newsletter({
-                email
+            const response = await fetch("/api/subscribe", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    email
+                })
             });
             const data = await response.json();
             if (data.success) {
-                toast.success(data.message || "Successfully subscribed to newsletter!");
+                toast.success("Successfully subscribed!");
                 setEmail("");
             } else {
-                toast.error("Failed to subscribe. Please try again.");
+                toast.error(data.error || "Failed to subscribe. Please try again.");
             }
         } catch (error) {
             console.error("Error subscribing to newsletter:", error);
@@ -330,18 +336,32 @@ export default function App() {
             url: video.url,
             views: video.views
         })) : [];
-    const handleRecipeRequest = (e)=>{
+    const handleRecipeRequest = async (e)=>{
         e.preventDefault();
-        const subject = `Recipe Request: ${recipeRequest.recipe || "Craivings suggestion"}`;
-        const body = `Name: ${recipeRequest.name || ""}\nRecipe: ${recipeRequest.recipe || ""}\n\nDetails:\n${recipeRequest.message || ""}`;
-        const mailto = `mailto:info@craivings.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.location.href = mailto;
-        toast.success("Opening your email client to send the request.");
-        setRecipeRequest({
-            name: "",
-            recipe: "",
-            message: ""
-        });
+        if (!recipeRequest.name || !recipeRequest.recipe) return;
+        try {
+            const response = await fetch("/api/recipe", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(recipeRequest)
+            });
+            const data = await response.json();
+            if (data.success) {
+                toast.success("Thanks for your suggestion! We'll review it.");
+                setRecipeRequest({
+                    name: "",
+                    recipe: "",
+                    message: ""
+                });
+            } else {
+                toast.error(data.error || "Failed to submit. Please try again.");
+            }
+        } catch (error) {
+            console.error("Error submitting recipe request:", error);
+            toast.error("Failed to submit. Please try again.");
+        }
     };
     return /*#__PURE__*/ _jsxs("div", {
         className: "min-h-screen bg-gradient-to-b from-[#F0F9F4] via-[#FFF9F3] to-white overflow-x-hidden",

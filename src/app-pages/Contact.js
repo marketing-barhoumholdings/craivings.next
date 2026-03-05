@@ -31,16 +31,35 @@ const Contact = ()=>{
         message: ""
     });
     const [submitting, setSubmitting] = useState(false);
-    const handleSubmit = (e)=>{
+    const handleSubmit = async (e)=>{
         e.preventDefault();
         setSubmitting(true);
-        const subject = formData.subject || "Craivings Contact Form";
-        const body = `Name: ${formData.name || ""}\nEmail: ${formData.email || ""}\n\nMessage:\n${formData.message || ""}`;
-        const mailto = `mailto:info@craivings.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        window.location.href = mailto;
-        setTimeout(()=>{
+        try {
+            const response = await fetch("/api/contact", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: formData.name,
+                    email: formData.email,
+                    message: formData.message
+                })
+            });
+            const data = await response.json();
+            if (data.success) {
+                setFormData({
+                    name: "",
+                    email: "",
+                    subject: "",
+                    message: ""
+                });
+            }
+        } catch (error) {
+            console.error("Contact submit error:", error);
+        } finally{
             setSubmitting(false);
-        }, 500);
+        }
     };
     const socialLinks = [
         {

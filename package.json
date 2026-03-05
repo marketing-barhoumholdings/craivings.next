@@ -411,7 +411,8 @@
     "xterm-addon-fit": "0.8.0",
     "xterm-for-react": "1.0.4",
     "zod": "^3.25.76",
-    "zustand": "4.5.5"
+    "zustand": "4.5.5",
+    "nodemailer": "^6.9.13"
   },
   "devDependencies": {
     "@babel/parser": "7.24.1",
